@@ -1,16 +1,18 @@
-# Horse Quotes App Handoff
+# Horse Quotes Working Mirror
 
-This directory is the source-of-truth scaffold for the South West Equine Services horse quotes app.
+This directory mirrors the approved planning scaffold for day-to-day repo browsing.
 
-Use these files in this order:
+The source of truth is `docs/horse-quotes/`.
 
-1. `next-chat-brief.md`
-2. `project-brief.md`
-3. `technical-decisions.md`
-4. `domain-rules.md`
-5. `calculation-reference.md`
-6. `design-direction.md`
-7. `build-sequence.md`
+Use the source-of-truth files in this order:
+
+1. `horse-quotes/next-chat-brief.md`
+2. `horse-quotes/project-brief.md`
+3. `horse-quotes/technical-decisions.md`
+4. `horse-quotes/domain-rules.md`
+5. `horse-quotes/calculation-reference.md`
+6. `horse-quotes/design-direction.md`
+7. `horse-quotes/build-sequence.md`
 
 ## Purpose
 
@@ -24,7 +26,7 @@ The goal is to replace the current spreadsheet-driven quoting workflow with a sm
 
 ## Current status
 
-The spreadsheet has already been analysed. The app design has been discussed and approved at a planning level. These docs are intended to let a fresh implementation chat start work without re-running the planning loop.
+The spreadsheet has already been analysed. The app design has been discussed and approved at a planning level. These mirrored docs are kept in-repo for convenience, but implementation should cite `docs/horse-quotes/*` as the authoritative copy.
 
 ## Spreadsheet analysis inputs
 

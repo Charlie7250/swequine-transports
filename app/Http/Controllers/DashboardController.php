@@ -13,8 +13,16 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'jobCount' => Job::count(),
-            'activeFuelPrice' => WeeklyFuelPrice::query()->where('is_active', true)->first(),
-            'activeRateSetting' => RateSetting::query()->where('is_active', true)->first(),
+            'activeFuelPrice' => WeeklyFuelPrice::query()
+                ->where('is_active', true)
+                ->orderByDesc('activated_at')
+                ->orderByDesc('id')
+                ->first(),
+            'activeRateSetting' => RateSetting::query()
+                ->where('is_active', true)
+                ->orderByDesc('effective_from')
+                ->orderByDesc('id')
+                ->first(),
         ]);
     }
 }

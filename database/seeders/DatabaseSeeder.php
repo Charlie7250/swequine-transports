@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\RateSetting;
+use App\Models\User;
 use App\Models\WeeklyFuelPrice;
 use Illuminate\Database\Seeder;
 
@@ -32,5 +33,14 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
             'effective_from' => '2026-08-10',
         ]);
+
+        if (app()->environment(['local', 'testing'])) {
+            User::query()->firstOrCreate([
+                'email' => 'ops@sweq.local',
+            ], [
+                'name' => 'SWES Operations',
+                'password' => 'password',
+            ]);
+        }
     }
 }

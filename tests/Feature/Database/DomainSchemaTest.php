@@ -16,6 +16,7 @@ class DomainSchemaTest extends TestCase
             'customers',
             'jobs',
             'job_revisions',
+            'queue_jobs',
             'weekly_fuel_prices',
             'rate_settings',
             'route_legs',

@@ -3,6 +3,7 @@
 namespace Tests\Unit\Pricing;
 
 use App\Services\Pricing\DeterministicPricingCalculator;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class DeterministicPricingCalculatorTest extends TestCase
@@ -84,5 +85,69 @@ class DeterministicPricingCalculatorTest extends TestCase
         $this->assertSame(12, $quote['legs'][2]['miles']);
         $this->assertSame($quote['engine_total'], $quote['final_total']);
         $this->assertSame([], $quote['overrides']);
+    }
+
+    public function test_it_ignores_a_blank_manual_final_total_override(): void
+    {
+        $calculator = new DeterministicPricingCalculator();
+
+        $quote = $calculator->calculate([
+            'week_commencing' => '2026-08-10',
+            'fuel_source' => 'manual_texaco_entry',
+            'fuel_price_per_litre_inc_vat' => '1.53',
+            'miles_per_gallon' => '22',
+            'litres_per_gallon' => '4.54',
+            'maintenance_per_mile' => '0.05',
+            'unloaded_add_on_per_mile' => '0.5555555556',
+            'loaded_add_on_per_mile' => '0.8064516129',
+            'manual_final_total' => '',
+            'legs' => [
+                [
+                    'label' => 'depot_to_pickup',
+                    'miles' => 10,
+                    'rate_type' => 'unloaded',
+                ],
+                [
+                    'label' => 'pickup_to_dropoff',
+                    'miles' => 90,
+                    'rate_type' => 'loaded',
+                ],
+                [
+                    'label' => 'dropoff_to_depot',
+                    'miles' => 96,
+                    'rate_type' => 'unloaded',
+                ],
+            ],
+        ]);
+
+        $this->assertSame('203.15', $quote['engine_total']);
+        $this->assertSame($quote['engine_total'], $quote['final_total']);
+        $this->assertSame([], $quote['overrides']);
+    }
+
+    public function test_it_rejects_unknown_leg_rate_types(): void
+    {
+        $calculator = new DeterministicPricingCalculator();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unsupported leg rate type [shared].');
+
+        $calculator->calculate([
+            'week_commencing' => '2026-08-10',
+            'fuel_source' => 'manual_texaco_entry',
+            'fuel_price_per_litre_inc_vat' => '1.53',
+            'miles_per_gallon' => '22',
+            'litres_per_gallon' => '4.54',
+            'maintenance_per_mile' => '0.05',
+            'unloaded_add_on_per_mile' => '0.5555555556',
+            'loaded_add_on_per_mile' => '0.8064516129',
+            'legs' => [
+                [
+                    'label' => 'depot_to_pickup',
+                    'miles' => 10,
+                    'rate_type' => 'shared',
+                ],
+            ],
+        ]);
     }
 }

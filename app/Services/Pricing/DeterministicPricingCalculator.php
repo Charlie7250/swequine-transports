@@ -2,6 +2,8 @@
 
 namespace App\Services\Pricing;
 
+use InvalidArgumentException;
+
 class DeterministicPricingCalculator
 {
     public function calculate(array $input): array
@@ -9,7 +11,7 @@ class DeterministicPricingCalculator
         $resolvedRates = $this->resolveRates($input);
         $pricedLegs = $this->priceLegs($input['legs'], $resolvedRates);
         $engineTotal = $this->sumLegAmounts($pricedLegs);
-        $manualFinalTotal = $input['manual_final_total'] ?? null;
+        $manualFinalTotal = $this->normaliseManualFinalTotal($input['manual_final_total'] ?? null);
         $overrides = $this->buildOverrides($manualFinalTotal);
         $finalTotal = $manualFinalTotal === null ? $engineTotal : $this->formatMoney((float) $manualFinalTotal);
 
@@ -57,7 +59,7 @@ class DeterministicPricingCalculator
     {
         return array_map(function (array $leg) use ($resolvedRates): array {
             $miles = (int) round((float) $leg['miles']);
-            $rateKey = $leg['rate_type'] === 'loaded' ? 'loaded_rate_per_mile' : 'unloaded_rate_per_mile';
+            $rateKey = $this->resolveLegRateKey($leg['rate_type']);
             $ratePerMile = (float) $resolvedRates[$rateKey];
             $amount = round($miles * $ratePerMile, 2);
 
@@ -78,6 +80,28 @@ class DeterministicPricingCalculator
         }, 0.0);
 
         return $this->formatMoney($total);
+    }
+
+    private function normaliseManualFinalTotal(null|int|float|string $manualFinalTotal): null|int|float|string
+    {
+        if ($manualFinalTotal === null) {
+            return null;
+        }
+
+        if (trim((string) $manualFinalTotal) === '') {
+            return null;
+        }
+
+        return $manualFinalTotal;
+    }
+
+    private function resolveLegRateKey(string $rateType): string
+    {
+        return match ($rateType) {
+            'loaded' => 'loaded_rate_per_mile',
+            'unloaded' => 'unloaded_rate_per_mile',
+            default => throw new InvalidArgumentException("Unsupported leg rate type [{$rateType}]."),
+        };
     }
 
     private function buildOverrides(null|int|float|string $manualFinalTotal): array

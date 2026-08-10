@@ -23,7 +23,7 @@ The approved source-of-truth docs live in:
 - `docs/horse-quotes/build-sequence.md`
 - `docs/horse-quotes/next-chat-brief.md`
 
-The same documents are also mirrored at `docs/*.md`.
+The files in `docs/*.md` are working mirrors for convenience. If wording drifts, `docs/horse-quotes/*` wins.
 
 ## Current milestone
 
@@ -42,6 +42,13 @@ The same documents are also mirrored at `docs/*.md`.
 6. Run `php artisan serve`.
 
 Tests run against in-memory SQLite via `php artisan test`.
+
+For a clean local bootstrap, `php artisan migrate --seed` creates:
+
+- `ops@sweq.local`
+- password: `password`
+
+Create a real staff user separately before any non-local deployment.
 
 ## Domain notes
 
