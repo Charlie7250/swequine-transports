@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'can_manage_quote_exceptions'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -25,8 +25,14 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'can_manage_quote_exceptions' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canManageQuoteExceptions(): bool
+    {
+        return (bool) $this->can_manage_quote_exceptions;
     }
 }

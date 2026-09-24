@@ -2,10 +2,11 @@
 
 ## Chosen stack
 
-- Backend: `PHP 8.3+`
+- Backend: `PHP 8.3+`, with the default local Docker image pinned to `PHP 8.5`
 - Framework: `Laravel 13`
 - Rendering: `Blade`
 - Database: `PostgreSQL`
+- Local development runtime: `Docker Compose`
 - Frontend behaviour: minimal JavaScript only where the workflow benefits from it
 - Hosting shape: standalone app on its own subdomain
 
@@ -56,6 +57,14 @@ PostgreSQL should store:
 - settings
 - customer and quote metadata
 
+PostgreSQL is the only application database outside automated tests.
+Standard tests retain in-memory SQLite for speed and isolation.
+PostgreSQL integration tests use a separate database ending in `_test`.
+
+Container startup must not run migrations or seeders.
+Legacy SQLite imports require an immutable snapshot and a validated PostgreSQL backup.
+The retained SQLite file stays unchanged until separate archival approval.
+
 ## Authentication
 
 V1 should use a basic internal staff login. Keep it simple. The first release does not need role complexity beyond what is required to keep the app private.
@@ -71,6 +80,16 @@ The app should stand alone first. Later options:
 ## Developer tooling stance
 
 Current-docs helpers such as Context7 can be used during implementation as a developer aid. They are not part of the runtime design.
+
+## Local runtime shape
+
+Use Docker Compose as the default local runtime:
+
+- one Laravel app container
+- one PostgreSQL container
+- container-to-container database wiring rather than relying on a host PostgreSQL service
+
+This keeps local bootstrap reproducible while preserving PostgreSQL as the target runtime.
 
 ## Dependency policy
 

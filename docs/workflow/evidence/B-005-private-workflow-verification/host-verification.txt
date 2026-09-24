@@ -1,0 +1,13 @@
+Command: composer run test:host
+Working directory: repository root
+Run date: 2026-09-17
+Exit code: 0
+Result: 203 tests passed with 1,417 assertions in 19,699 milliseconds.
+
+Command: composer validate --no-check-publish
+Working directory: repository root
+Run date: 2026-09-17
+Exit code: 0
+Result: ./composer.json is valid
+
+Both commands emitted warnings that curl, fileinfo, mbstring, openssl, pdo_pgsql, pgsql, and zip were already loaded.

@@ -28,9 +28,19 @@ class Job extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function transportDay(): BelongsTo
+    {
+        return $this->belongsTo(TransportDay::class);
+    }
+
     public function revisions(): HasMany
     {
         return $this->hasMany(JobRevision::class);
+    }
+
+    public function transportEnquiries(): HasMany
+    {
+        return $this->hasMany(TransportEnquiry::class, 'quote_job_id');
     }
 
     public function currentWorkingRevision(): BelongsTo

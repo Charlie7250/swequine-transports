@@ -23,6 +23,9 @@ class DatabaseSeederTest extends TestCase
 
         $this->assertSame(1, User::query()->count());
         $this->assertTrue(WeeklyFuelPrice::query()->sole()->is_active);
-        $this->assertTrue(RateSetting::query()->sole()->is_active);
+        $rateSetting = RateSetting::query()->sole();
+        $this->assertTrue($rateSetting->is_active);
+        $this->assertSame('1.500000', $rateSetting->one_horse_multiplier);
+        $this->assertSame('1.750000', $rateSetting->two_horse_multiplier);
     }
 }

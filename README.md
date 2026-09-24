@@ -4,10 +4,12 @@ This is the standalone internal Laravel app that replaces the spreadsheet-driven
 
 ## Stack
 
-- PHP 8.3+
+- PHP 8.3+ for the application
+- PHP 8.5 in the default Docker app image
 - Laravel 13
 - Blade
 - PostgreSQL for the target runtime
+- Docker Compose for the default local runtime
 - Minimal JavaScript
 
 ## Approved planning docs
@@ -34,6 +36,26 @@ The files in `docs/*.md` are working mirrors for convenience. If wording drifts,
 
 ## Local setup
 
+Docker Compose is the default local runtime. You do not need a host PostgreSQL service for the normal bootstrap path.
+
+1. Copy `.env.example` to `.env`.
+2. Start the local stack with `docker compose up --build -d`.
+3. Run `docker compose exec app php artisan migrate --seed`.
+4. Open `http://localhost:8000`.
+
+The Docker path builds the PHP dependencies and frontend assets into the app image. After PHP, Blade, JavaScript, or Composer changes, rerun `docker compose up --build -d` so the container picks up the updated code.
+
+For a clean Docker bootstrap, `docker compose exec app php artisan migrate --seed` creates:
+
+- `ops@sweq.local`
+- password: `password`
+
+Create a real staff user separately before any non-local deployment.
+
+## Direct host runtime
+
+If you want to run Laravel directly on your machine instead of through Docker:
+
 1. Install PHP dependencies with `composer install`.
 2. Copy `.env.example` to `.env`.
 3. Set PostgreSQL credentials in `.env`.
@@ -41,14 +63,22 @@ The files in `docs/*.md` are working mirrors for convenience. If wording drifts,
 5. Run `php artisan migrate --seed`.
 6. Run `php artisan serve`.
 
-Tests run against in-memory SQLite via `php artisan test`.
+Tests use in-memory SQLite.
+On the current Windows host, run `composer run test:host` to load the installed SQLite extensions for that test process only.
+This command does not install extensions or edit the host PHP settings.
+In the app container, run `docker compose exec app php vendor/bin/phpunit --do-not-cache-result`.
+SQLite test success does not establish PostgreSQL compatibility.
 
-For a clean local bootstrap, `php artisan migrate --seed` creates:
+Run PostgreSQL integration checks inside the app container:
 
-- `ops@sweq.local`
-- password: `password`
+```text
+docker compose exec app php vendor/bin/phpunit -c phpunit.postgresql.xml --do-not-cache-result
+```
 
-Create a real staff user separately before any non-local deployment.
+The runtime rejects SQLite outside standard automated tests.
+Container startup does not run migrations or seeders.
+
+Use `docs/legacy-sqlite-migration-runbook.md` for the controlled legacy import.
 
 ## Domain notes
 

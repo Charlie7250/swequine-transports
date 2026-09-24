@@ -35,7 +35,7 @@ The relevant pattern is:
 - unloaded rate = base cost per mile plus unloaded add-on
 - loaded rate = base cost per mile plus loaded add-on
 - two-horse rate = loaded rate multiplied above the single-horse loaded rate
-- shared-load rate = some split version of the higher-rate journey, depending on which legs are shared
+- shared-load rate = a configurable percentage of the loaded rate for genuinely shared loaded portions, depending on which legs are shared
 
 ## Workbook formula evidence
 
@@ -72,6 +72,14 @@ Use this as the initial transport engine:
 7. Sum the legs.
 8. Apply explicit extras or overrides only when entered.
 9. Store both raw calculated total and final quoted total.
+
+For standard single quotes in V1:
+
+- the engine should reject any revision that does not have the full three-leg pattern of `depot_to_pickup`, `pickup_to_dropoff`, and `dropoff_to_depot`
+- blank fuel or rate inputs should be rejected, not treated as zero
+- when a revision already points at a specific weekly fuel record or rate setting, that stored record should be used for repricing instead of whichever record is currently active
+- a manual final total remains authoritative only as the final quoted total, the engine total must still be recalculated and retained separately
+- the three-leg pattern remains pricing-authoritative even when the real-world trip is appended onto another operational job
 
 ## Proposed explanation payload
 
@@ -139,6 +147,17 @@ Observed behaviour:
 - total per customer is the sum of that customer's allocated leg amounts
 
 This supports the decision to model shared runs as a parent object plus explicit per-customer allocations.
+
+## Client-confirmed shared-load rule
+
+The client has confirmed these V1 pricing rules for shared loads:
+
+- each quote still starts from the pricing assumption of `depot to pickup`, `pickup to drop-off`, and `drop-off to depot`
+- appending a job onto another real-world journey does not by itself reduce the quoted transport path for that client
+- only genuinely shared portions should be split
+- when a loaded portion is genuinely shared, each client typically pays `0.75 * loaded rate` for that shared portion, though operators may sometimes need a higher percentage
+
+V1 should therefore treat the shared-load percentage as a configurable pricing input in settings, not a hard-coded constant in the calculator or UI.
 
 ## Loading-practice pricing
 

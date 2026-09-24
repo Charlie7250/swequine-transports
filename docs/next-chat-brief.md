@@ -28,6 +28,7 @@ This is a small internal web app for horse transport quotes, shared loads, loadi
 - `Laravel 13`
 - `Blade`
 - `PostgreSQL`
+- `Docker Compose` for the default local runtime
 - minimal JavaScript
 
 ## Constraints
@@ -62,6 +63,7 @@ Begin with `Phase 1` and `Phase 2` from `build-sequence.md`, then move into `Pha
 Get to this state first:
 
 - Laravel app bootstrapped
+- Docker Compose local runtime in place for the app and PostgreSQL
 - docs copied into repo if needed
 - database schema in place for jobs, revisions, rates, and route legs
 - deterministic pricing engine under test

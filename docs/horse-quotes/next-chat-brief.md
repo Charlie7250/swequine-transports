@@ -4,7 +4,7 @@ Use this file to start a fresh implementation chat.
 
 ## Goal
 
-Build the first usable version of the South West Equine Services horse quotes app from the approved plan and scaffolded docs in this directory.
+Build the Release 2 Beta Evidence Baseline for the South West Equine Services horse quotes app from the approved plan and scaffolded docs in this directory.
 
 ## Source of truth
 
@@ -17,6 +17,7 @@ Read these files first and treat them as the active plan:
 5. `docs/horse-quotes/calculation-reference.md`
 6. `docs/horse-quotes/design-direction.md`
 7. `docs/horse-quotes/build-sequence.md`
+8. `docs/horse-quotes/release-2/beta-evidence-baseline.md`
 
 ## Product summary
 
@@ -28,6 +29,7 @@ This is a small internal web app for horse transport quotes, shared loads, loadi
 - `Laravel 13`
 - `Blade`
 - `PostgreSQL`
+- `Docker Compose` for the default local runtime
 - minimal JavaScript
 
 ## Constraints
@@ -41,10 +43,14 @@ This is a small internal web app for horse transport quotes, shared loads, loadi
 ## Spreadsheet-derived rules to preserve
 
 - quote legs are priced as unloaded, loaded, then unloaded
+- each client quote is always priced as a full depot or home round trip, even when operationally appended onto another job
 - weekly fuel price affects rates
 - loading practice stays separate in V1
 - shared loads need partial-overlap support
+- shared loaded portions use a configurable percentage of the loaded rate, with `0.75` as the typical current starting point
 - manual final totals must be retained alongside engine totals
+
+Release 1 verification closure is complete. The current slice is measurement-led, not a new staging or production approval.
 
 ## Spreadsheet-derived behaviours not to preserve
 
@@ -55,16 +61,16 @@ This is a small internal web app for horse transport quotes, shared loads, loadi
 
 ## Recommended starting point
 
-Begin with `Phase 1` and `Phase 2` from `build-sequence.md`, then move into `Phase 3` so the pricing engine becomes the first trustworthy system component.
+Begin with `Phase 11` from `build-sequence.md` and keep the evidence capture aligned with `release-2/beta-evidence-baseline.md`.
 
 ## First implementation milestone
 
 Get to this state first:
 
-- Laravel app bootstrapped
-- docs copied into repo if needed
-- database schema in place for jobs, revisions, rates, and route legs
-- deterministic pricing engine under test
+- the Beta operational evidence panel is available to named staff
+- 20 real transport quotes have been recorded against the Release 2 baseline
+- route outcomes, failure categories, original exception reasons, fallback and override rates, and turnaround medians are visible
+- the 20-quote checkpoint has a jointly recorded next behavioural refinement
 
 ## Handoff note
 

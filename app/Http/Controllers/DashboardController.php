@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
-use App\Models\RateSetting;
-use App\Models\WeeklyFuelPrice;
+use App\Services\Reporting\OperatorDashboardBuilder;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        private readonly OperatorDashboardBuilder $dashboardBuilder,
+    ) {}
+
     public function __invoke(): View
     {
+        $userName = trim((string) auth()->user()?->name);
+
         return view('dashboard', [
-            'jobCount' => Job::count(),
-            'activeFuelPrice' => WeeklyFuelPrice::query()
-                ->where('is_active', true)
-                ->orderByDesc('activated_at')
-                ->orderByDesc('id')
-                ->first(),
-            'activeRateSetting' => RateSetting::query()
-                ->where('is_active', true)
-                ->orderByDesc('effective_from')
-                ->orderByDesc('id')
-                ->first(),
+            'dashboard' => $this->dashboardBuilder->build(),
+            'greetingName' => $userName === '' ? null : Str::before($userName, ' '),
         ]);
     }
 }

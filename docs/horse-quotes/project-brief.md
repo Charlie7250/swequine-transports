@@ -57,6 +57,14 @@ The workbook suggests the real business workflow is built around:
 - a partial shared-load method that splits some legs but not all
 - manual promotion of records across quote, pending, booked, and completed states
 
+## Client-confirmed pricing rules
+
+The client has now confirmed these transport pricing rules:
+
+- every transport quote is priced as a full depot or home round trip of `depot to pickup`, `pickup to drop-off`, and `drop-off to depot`
+- this full-round-trip pricing still applies even when the real-world journey is appended onto another job in the operational pipeline
+- shared-load pricing should support a configurable percentage of the loaded rate per client for shared portions, with `0.75` as the typical current starting point
+
 ## Known uncertainties
 
 These need confirmation during implementation or client review:

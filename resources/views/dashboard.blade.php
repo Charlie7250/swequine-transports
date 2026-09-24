@@ -1,50 +1,80 @@
 @extends('layouts.app', ['title' => 'Dashboard'])
 
 @section('content')
-    <main class="page">
-        <section class="hero">
-            <span class="eyebrow">Phase 1 and Phase 2</span>
-            <h1 class="page-title">Deterministic horse quotes, with the spreadsheet rules made visible.</h1>
-            <p class="page-copy">
-                This internal app starts with explicit route legs, revision history, weekly fuel pricing, and auditable totals.
-                Shared loads and loading practice stay modelled separately so the pricing core remains understandable.
-            </p>
-        </section>
+    <header class="dashboard-hero">
+        <div>
+            <h1>Dashboard</h1>
+            <p class="dashboard-date-meta">{{ $dashboard['display_date'] }}</p>
+        </div>
+        <a class="prototype-button prototype-button--primary" href="{{ route('quotes.create') }}">
+            <x-prototype-icon name="plus" :size="20" />
+            New quote
+        </a>
+    </header>
 
-        <section class="card-grid">
-            <article class="metric">
-                <div class="metric-label">Transport jobs</div>
-                <div class="metric-value">{{ $jobCount }}</div>
-                <div class="metric-copy">Revisioned jobs will carry issued, booked, and completed reporting dates.</div>
-            </article>
+    <section class="dashboard-summary-grid" aria-label="Operational summary">
+        @foreach ($dashboard['summary'] as $item)
+            <x-dashboard-summary-card :item="$item" />
+        @endforeach
+    </section>
 
-            <article class="metric">
-                <div class="metric-label">Active fuel input</div>
-                <div class="metric-value">
-                    {{ $activeFuelPrice?->price_per_litre_inc_vat ? '£' . number_format((float) $activeFuelPrice->price_per_litre_inc_vat, 4) : 'Pending' }}
+    <section class="dashboard-section">
+        <header class="dashboard-section-heading">
+            <div>
+                <h2>Upcoming transport days</h2>
+            </div>
+            <div class="dashboard-section-tools">
+                <x-dashboard-date-controls :range="$dashboard['date_range']" />
+                <a class="dashboard-section-link" href="{{ route('transport-days.index') }}">View all transport days</a>
+            </div>
+        </header>
+
+        <div class="transport-day-list">
+            @forelse ($dashboard['days'] as $day)
+                <x-transport-day-card :day="$day" />
+            @empty
+                <div class="transport-day-empty dashboard-empty-window">
+                    <span class="transport-day-empty-icon"><x-prototype-icon name="calendar" :size="24" /></span>
+                    <div>
+                        <strong>No transport days in this week</strong>
+                        <p>Create a day before assigning work to this period.</p>
+                    </div>
+                    <a class="prototype-button prototype-button--quiet" href="{{ route('transport-days.create') }}">Create transport day</a>
                 </div>
-                <div class="metric-copy">
-                    {{ $activeFuelPrice?->week_commencing?->format('j M Y') ?? 'Seed a weekly fuel entry to activate quote calculations.' }}
-                </div>
-            </article>
+            @endforelse
+        </div>
+    </section>
 
-            <article class="metric">
-                <div class="metric-label">Active rate setting</div>
-                <div class="metric-value">{{ $activeRateSetting?->depot_postcode ?? 'Pending' }}</div>
-                <div class="metric-copy">
-                    {{ $activeRateSetting?->name ?? 'Seed the initial depot postcode and rate assumptions for pricing.' }}
-                </div>
-            </article>
-        </section>
+    <section class="dashboard-section dashboard-section--unassigned">
+        <header class="dashboard-section-heading">
+            <div>
+                <h2>Unassigned work</h2>
+            </div>
+            <span class="dashboard-count">{{ $dashboard['unassigned_jobs']->count() }}</span>
+        </header>
 
-        <section class="panel">
-            <h2 class="section-title">Current implementation focus</h2>
-            <ul class="bullet-list">
-                <li>Use three explicit route legs for quote pricing, unloaded, loaded, then unloaded.</li>
-                <li>Retain engine totals and final quoted totals separately for audit and reporting.</li>
-                <li>Keep shared-run allocations and loading-practice records in separate tables.</li>
-                <li>Make weekly fuel inputs and rate settings easy to update without touching view code.</li>
-            </ul>
-        </section>
-    </main>
+        @if ($dashboard['unassigned_jobs']->isNotEmpty())
+            <div class="unassigned-list">
+                @foreach ($dashboard['unassigned_jobs'] as $job)
+                <article class="unassigned-job">
+                    <span class="unassigned-job-icon"><x-prototype-icon name="document" :size="22" /></span>
+                    <div class="unassigned-job-copy">
+                        <strong>Collect {{ $job['horse_count'] }} {{ \Illuminate\Support\Str::plural('horse', $job['horse_count']) }} for {{ $job['customer'] }}</strong>
+                        <span>Job #{{ $job['id'] }}. Collection: {{ $job['pickup'] ?? 'not recorded' }}. Drop-off: {{ $job['dropoff'] ?? 'not recorded' }}.</span>
+                    </div>
+                    <div class="unassigned-job-meta">
+                        <span>{{ $job['horse_count'] }} {{ \Illuminate\Support\Str::plural('horse', $job['horse_count']) }}</span>
+                        <x-job-status :status="$job['status']" />
+                    </div>
+                    <div class="unassigned-job-actions">
+                        @if ($job['action_url'])
+                            <a class="prototype-button prototype-button--quiet" href="{{ $job['action_url'] }}">View job</a>
+                        @endif
+                        <a class="prototype-button prototype-button--quiet" href="{{ route('transport-days.index') }}">Assign to a day</a>
+                    </div>
+                </article>
+                @endforeach
+            </div>
+        @endif
+    </section>
 @endsection

@@ -1,0 +1,10 @@
+.env
+.git
+.gitignore
+.phpunit.result.cache
+node_modules
+vendor
+database/database.sqlite
+storage/app/private/legacy-imports
+storage/logs
+storage/framework/cache/data

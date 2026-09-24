@@ -1,0 +1,179 @@
+ M .env.example
+ M .gitignore
+ M README.md
+ M app/Http/Controllers/DashboardController.php
+ M app/Models/Job.php
+ M app/Models/JobRevision.php
+ M app/Models/LoadingPracticeQuote.php
+ M app/Models/RateSetting.php
+ M app/Models/User.php
+ M app/Models/WeeklyFuelPrice.php
+ M app/Providers/AppServiceProvider.php
+ M app/Services/Pricing/DeterministicPricingCalculator.php
+ M artisan
+ M composer.json
+ M config/services.php
+ M database/factories/UserFactory.php
+ M database/seeders/DatabaseSeeder.php
+ M docs/build-sequence.md
+ M docs/horse-quotes/build-sequence.md
+ M docs/horse-quotes/calculation-reference.md
+ M docs/horse-quotes/domain-rules.md
+ M docs/horse-quotes/next-chat-brief.md
+ M docs/horse-quotes/project-brief.md
+ M docs/horse-quotes/technical-decisions.md
+ M docs/next-chat-brief.md
+ M docs/technical-decisions.md
+ M phpunit.xml
+ M resources/views/dashboard.blade.php
+ M resources/views/layouts/app.blade.php
+ M routes/web.php
+ M tests/Feature/Database/ActivePricingRecordTest.php
+ M tests/Feature/Database/DatabaseSeederTest.php
+ M tests/Feature/Database/DomainSchemaTest.php
+ M tests/Unit/Pricing/DeterministicPricingCalculatorTest.php
+?? .dockerignore
+?? Dockerfile
+?? app/Http/Controllers/Admin/FuelPriceSourceController.php
+?? app/Http/Controllers/Admin/RateSettingActivationController.php
+?? app/Http/Controllers/Admin/RateSettingController.php
+?? app/Http/Controllers/Admin/WeeklyFuelPriceActivationController.php
+?? app/Http/Controllers/Admin/WeeklyFuelPriceController.php
+?? app/Http/Controllers/JobRevisionController.php
+?? app/Http/Controllers/LoadingPracticeQuoteController.php
+?? app/Http/Controllers/QuoteExceptionController.php
+?? app/Http/Controllers/SharedRunController.php
+?? app/Http/Controllers/TransportDayController.php
+?? app/Http/Controllers/TransportEnquiryQuoteController.php
+?? app/Http/Requests/CorrectTransportEnquiryRouteRequest.php
+?? app/Http/Requests/IssueJobRevisionRequest.php
+?? app/Http/Requests/ResolveTransportEnquiryRequest.php
+?? app/Http/Requests/SaveFinalTotalOverrideRequest.php
+?? app/Http/Requests/SaveLoadingPracticeQuoteRequest.php
+?? app/Http/Requests/SaveManualRouteFallbackRequest.php
+?? app/Http/Requests/SaveQuoteWorkspaceRequest.php
+?? app/Http/Requests/SaveRouteLegOverridesRequest.php
+?? app/Http/Requests/SaveSharedRunRequest.php
+?? app/Http/Requests/SaveTransportDayRequest.php
+?? app/Http/Requests/SelectRevisionFuelPriceRequest.php
+?? app/Http/Requests/StoreFuelPriceSourceRequest.php
+?? app/Http/Requests/StoreRateSettingRequest.php
+?? app/Http/Requests/StoreWeeklyFuelPriceRequest.php
+?? app/Models/FuelPriceSource.php
+?? app/Models/QuoteExceptionAudit.php
+?? app/Models/RouteResolution.php
+?? app/Models/RouteResolutionLeg.php
+?? app/Models/RouteResolutionReviewDecision.php
+?? app/Models/TransportDay.php
+?? app/Models/TransportEnquiry.php
+?? app/Services/Intake/TransportEnquiryQuoteWorkflow.php
+?? app/Services/Intake/TransportEnquiryRouteReview.php
+?? app/Services/LoadingPractice/LoadingPracticeQuoteManager.php
+?? app/Services/Pricing/JobRevisionPricingContextResolver.php
+?? app/Services/Pricing/JobRevisionPricingEngine.php
+?? app/Services/Pricing/LoadingPracticePricingCalculator.php
+?? app/Services/Pricing/LoadingPracticePricingContextResolver.php
+?? app/Services/Pricing/RateSettingManager.php
+?? app/Services/Pricing/WeeklyFuelPriceManager.php
+?? app/Services/Quotes/IssuedQuoteChecklist.php
+?? app/Services/Quotes/IssuedQuoteEvidenceBuilder.php
+?? app/Services/Quotes/QuoteWorkspaceManager.php
+?? app/Services/Quotes/SharedRunManager.php
+?? app/Services/Reporting/ReleaseOneOperationalEvidenceBuilder.php
+?? app/Services/Reporting/TransportDashboardBuilder.php
+?? app/Services/Routing/HereRouteDistanceAdapter.php
+?? app/Services/Routing/RouteDistanceAdapter.php
+?? app/Services/Routing/RouteResolutionManager.php
+?? app/Services/Routing/RouteResolutionRequest.php
+?? app/Services/Scheduling/TransportDayManager.php
+?? compose.yaml
+?? config/job_statuses.php
+?? database/factories/FuelPriceSourceFactory.php
+?? database/migrations/2026_08_14_102500_add_shared_load_percentage_to_rate_settings_table.php
+?? database/migrations/2026_08_20_200100_expand_rate_settings_and_loading_practice_quotes_for_phase_seven.php
+?? database/migrations/2026_08_21_000001_create_transport_enquiries_table.php
+?? database/migrations/2026_08_21_000002_create_route_resolutions_table.php
+?? database/migrations/2026_08_21_000003_create_route_resolution_legs_table.php
+?? database/migrations/2026_08_21_000004_add_route_resolution_id_to_job_revisions_table.php
+?? database/migrations/2026_08_21_000005_add_controlled_exception_audits.php
+?? database/migrations/2026_08_22_000006_add_exception_authority_and_review_decisions.php
+?? database/migrations/2026_08_22_000007_add_issued_quote_evidence_to_job_revisions_table.php
+?? database/migrations/2026_08_23_000008_create_fuel_price_sources_table.php
+?? database/migrations/2026_08_23_000009_create_transport_days_table.php
+?? database/migrations/2026_09_13_000010_add_one_horse_multiplier_to_rate_settings_table.php
+?? docs/horse-quotes/features/transport-day-pipeline.md
+?? docs/horse-quotes/release-1/README.md
+?? docs/horse-quotes/release-1/implementation-slice-plan.md
+?? docs/horse-quotes/release-1/open-decisions.md
+?? docs/horse-quotes/release-1/operator-workflow-spec.md
+?? docs/horse-quotes/release-1/quote-creation-ux-outline.md
+?? docs/horse-quotes/release-1/release-1-acceptance-criteria.md
+?? docs/horse-quotes/release-1/routing-and-distance-contract.md
+?? docs/horse-quotes/release-1/staging-smoke-check.md
+?? docs/horse-quotes/release-2/beta-evidence-baseline.md
+?? docs/horse-quotes/strategy/README.md
+?? docs/horse-quotes/strategy/benchmark-review.md
+?? docs/horse-quotes/strategy/deployment-and-operations-plan.md
+?? docs/horse-quotes/strategy/discovery-and-question-log.md
+?? docs/horse-quotes/strategy/future-platform-roadmap.md
+?? docs/horse-quotes/strategy/mvp-reset-and-usability-gate.md
+?? docs/horse-quotes/strategy/release-roadmap.md
+?? docs/horse-quotes/strategy/vision-and-product-thesis.md
+?? docs/local-development.md
+?? docs/workflow/batches/B-001-private-mvp-readiness.md
+?? docs/workflow/batches/B-002-local-test-baseline.md
+?? docs/workflow/batches/B-003-pricing-policy-and-examples.md
+?? docs/workflow/batches/B-004-pricing-alignment.md
+?? docs/workflow/current-batch.md
+?? docs/workflow/derived/build-and-release-plan.md
+?? docs/workflow/derived/delivery-plan.md
+?? docs/workflow/derived/expansion-architecture.md
+?? docs/workflow/derived/private-mvp-readiness.md
+?? docs/workflow/evidence/B-005-private-workflow-verification/frontend-build.txt
+?? docs/workflow/evidence/B-005-private-workflow-verification/host-verification.txt
+?? docs/workflow/evidence/B-005-private-workflow-verification/manifest.md
+?? docs/workflow/evidence/B-005-private-workflow-verification/repository-status.txt
+?? docs/workflow/evidence/B-005-private-workflow-verification/screenshots/README.md
+?? docs/workflow/index.md
+?? docs/workflow/intent.md
+?? docs/workflow/pricing-policy.md
+?? resources/views/admin/rate-settings/index.blade.php
+?? resources/views/admin/weekly-fuel-prices/index.blade.php
+?? resources/views/components/status-badge.blade.php
+?? resources/views/dashboard/_job-row.blade.php
+?? resources/views/job-revisions/_workspace-form.blade.php
+?? resources/views/job-revisions/create.blade.php
+?? resources/views/job-revisions/exceptions.blade.php
+?? resources/views/job-revisions/issued.blade.php
+?? resources/views/job-revisions/show.blade.php
+?? resources/views/loading-practice-quotes/_form.blade.php
+?? resources/views/loading-practice-quotes/create.blade.php
+?? resources/views/loading-practice-quotes/show.blade.php
+?? resources/views/shared-runs/form.blade.php
+?? resources/views/transport-days/create.blade.php
+?? resources/views/transport-days/index.blade.php
+?? resources/views/transport-days/show.blade.php
+?? resources/views/transport-enquiries/create.blade.php
+?? resources/views/transport-enquiries/route-exception.blade.php
+?? resources/views/transport-enquiries/route-review.blade.php
+?? tests/Feature/Admin/FuelPriceSourceTest.php
+?? tests/Feature/Admin/RateSettingAdminTest.php
+?? tests/Feature/Admin/WeeklyFuelPriceAdminTest.php
+?? tests/Feature/Dashboard/PipelineDashboardTest.php
+?? tests/Feature/Enquiries/TransportEnquiryPersistenceTest.php
+?? tests/Feature/LoadingPractice/LoadingPracticeQuoteFlowTest.php
+?? tests/Feature/Pricing/JobRevisionPricingEngineTest.php
+?? tests/Feature/Quotes/ControlledRouteExceptionsTest.php
+?? tests/Feature/Quotes/IssuedQuoteOutputTest.php
+?? tests/Feature/Quotes/JobRevisionShowTest.php
+?? tests/Feature/Quotes/QuoteWorkspaceTest.php
+?? tests/Feature/Quotes/RouteFirstTransportQuoteFlowTest.php
+?? tests/Feature/Quotes/SharedRunBuilderTest.php
+?? tests/Feature/Routing/HereRouteDistanceAdapterTest.php
+?? tests/Feature/Routing/RouteResolutionManagerTest.php
+?? tests/Feature/Scheduling/TransportDayControllerTest.php
+?? tests/Feature/Scheduling/TransportDayManagerTest.php
+?? tests/Feature/Scheduling/TransportDayTest.php
+?? tests/Feature/Status/JobStatusDisplayTest.php
+?? tests/Unit/Pricing/DeterministicPricingCalculatorSharedLoadTest.php
+?? tests/Unit/Pricing/LoadingPracticePricingCalculatorTest.php

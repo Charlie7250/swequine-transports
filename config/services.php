@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'here' => [
+        'api_key' => env('HERE_API_KEY'),
+        'geocoding_url' => env('HERE_GEOCODING_URL', 'https://geocode.search.hereapi.com/v1/geocode'),
+        'routing_url' => env('HERE_ROUTING_URL', 'https://router.hereapi.com/v8/routes'),
+    ],
+
 ];

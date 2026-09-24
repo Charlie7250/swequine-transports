@@ -41,6 +41,7 @@ class ActivePricingRecordTest extends TestCase
             'maintenance_per_mile' => '0.050000',
             'unloaded_add_on_per_mile' => '0.555556',
             'loaded_add_on_per_mile' => '0.806452',
+            'one_horse_multiplier' => '1.500000',
             'two_horse_multiplier' => '1.150000',
             'is_active' => true,
         ]);
@@ -55,6 +56,7 @@ class ActivePricingRecordTest extends TestCase
             'maintenance_per_mile' => '0.050000',
             'unloaded_add_on_per_mile' => '0.555556',
             'loaded_add_on_per_mile' => '0.806452',
+            'one_horse_multiplier' => '1.500000',
             'two_horse_multiplier' => '1.150000',
             'is_active' => true,
         ]);

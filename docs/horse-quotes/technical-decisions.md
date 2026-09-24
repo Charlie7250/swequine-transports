@@ -2,10 +2,11 @@
 
 ## Chosen stack
 
-- Backend: `PHP 8.3+`
+- Backend: `PHP 8.3+`, with the default local Docker image pinned to `PHP 8.5`
 - Framework: `Laravel 13`
 - Rendering: `Blade`
 - Database: `PostgreSQL`
+- Local development runtime: `Docker Compose`
 - Frontend behaviour: minimal JavaScript only where the workflow benefits from it
 - Hosting shape: standalone app on its own subdomain
 
@@ -56,6 +57,14 @@ PostgreSQL should store:
 - settings
 - customer and quote metadata
 
+PostgreSQL is the only application database outside automated tests.
+Standard tests retain in-memory SQLite for speed and isolation.
+PostgreSQL integration tests use a separate database ending in `_test`.
+
+Container startup must not run migrations or seeders.
+Legacy SQLite imports require an immutable snapshot and a validated PostgreSQL backup.
+The retained SQLite file stays unchanged until separate archival approval.
+
 ## Authentication
 
 V1 should use a basic internal staff login. Keep it simple. The first release does not need role complexity beyond what is required to keep the app private.
@@ -71,6 +80,28 @@ The app should stand alone first. Later options:
 ## Developer tooling stance
 
 Current-docs helpers such as Context7 can be used during implementation as a developer aid. They are not part of the runtime design.
+
+## Release evidence baseline
+
+Release 1 verification closure is complete and remains documented as a route-first transport workflow with its evidence baseline.
+
+Release 2 is measurement-led. Its beta operational evidence panel records real transport quotes from named staff and captures route outcomes, failure categories, original exception reasons, fallback rates, override rates, and turnaround medians.
+
+Exception reason counts use original audit events only. Revision-history copies do not inflate counts. Empty data displays exactly `No transport exception reasons recorded.`
+
+This slice does not change route-first transport quoting, the three-leg rule, service-layer pricing, loading-practice separation, the existing shared-load policy, or the environment-only HERE credential model.
+
+Do not make live HERE calls, store HERE secrets in the repo, or add dependencies for this baseline.
+
+## Local runtime shape
+
+Use Docker Compose as the default local runtime:
+
+- one Laravel app container
+- one PostgreSQL container
+- container-to-container database wiring rather than relying on a host PostgreSQL service
+
+This keeps local bootstrap reproducible while preserving PostgreSQL as the target runtime.
 
 ## Dependency policy
 

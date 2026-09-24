@@ -17,7 +17,9 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
+
+    'postgres_integration_test' => env('POSTGRES_INTEGRATION_TEST', false),
 
     /*
     |--------------------------------------------------------------------------

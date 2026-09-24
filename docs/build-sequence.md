@@ -11,6 +11,7 @@ The order matters. Do foundations first, then pricing truth, then workflows, the
 Deliverables:
 
 - initialise Laravel 13 project
+- add Dockerfile and Docker Compose local runtime for the app and PostgreSQL
 - configure PostgreSQL connection
 - set up environment example file
 - set up base auth for internal staff access
@@ -20,7 +21,7 @@ Deliverables:
 
 Acceptance focus:
 
-- app boots locally
+- app boots locally through Docker Compose
 - staff can sign in
 - docs are present in the repo
 

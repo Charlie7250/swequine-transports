@@ -11,6 +11,7 @@ The order matters. Do foundations first, then pricing truth, then workflows, the
 Deliverables:
 
 - initialise Laravel 13 project
+- add Dockerfile and Docker Compose local runtime for the app and PostgreSQL
 - configure PostgreSQL connection
 - set up environment example file
 - set up base auth for internal staff access
@@ -20,7 +21,7 @@ Deliverables:
 
 Acceptance focus:
 
-- app boots locally
+- app boots locally through Docker Compose
 - staff can sign in
 - docs are present in the repo
 
@@ -62,6 +63,7 @@ Deliverables:
 
 - weekly fuel price admin screen
 - rate settings admin screen
+- support for a configurable shared-load percentage within rate settings
 - support for a manual override of active weekly fuel input
 - history view for weekly fuel entries
 
@@ -95,12 +97,14 @@ Deliverables:
 - parent shared-run workflow
 - attach multiple customer allocations
 - represent full-charge and split-charge legs
+- apply the active shared-load percentage to genuinely shared loaded portions
 - show allocation reasoning in the calculation explanation
 
 Acceptance focus:
 
 - partial overlap can be represented cleanly
 - each customer allocation produces its own auditable total
+- appended operational jobs do not bypass the full-round-trip pricing rule for each client quote
 
 ## Phase 7, loading-practice module
 
@@ -166,6 +170,22 @@ Deliverables:
 Acceptance focus:
 
 - the internal team can rely on the app day to day
+
+## Phase 11, beta evidence baseline
+
+Deliverables:
+
+- named staff record 20 real transport quotes using the Beta operational evidence panel
+- capture route outcomes, failure categories, original exception reasons, fallback rates, override rates, quote-ready medians, and issued medians
+- record the highest-frequency blocker and exception reasons at the 20-quote checkpoint
+- document the next behavioural refinement chosen by the business and technical owners
+
+Acceptance focus:
+
+- the evidence baseline is complete and readable
+- exception counts use original audit events only
+- the checkpoint does not approve the next change, deployment, or daily-reliance release
+- transport-day remains proposed and out of scope for this slice
 
 ## Implementation guardrails
 
