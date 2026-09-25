@@ -18,17 +18,11 @@ Tasks are `[ ]` todo, `[~]` in progress, `[x]` done. Keep this file honest.
 
 ## ⚠️ E1 — Loop blocker: frontend build fails under restricted egress (needs a decision)
 
-- [ ] **E1. Make the frontend build work in the loop environment.** `vite.config.js` fetches the
-  `Instrument Sans` font from `fonts.bunny.net` at build time; this session's egress policy denies
-  that host (403), so `npm run build` fails, no `public/build/manifest.json` is produced, and ~79
-  view-rendering tests 500. **This blocks all loop verification of any view.** Two clean fixes, one
-  is the user's to pick:
-  - **Code:** self-host the font (bundle the woff2 + local `@font-face`) or drop the `fonts` block
-    from `vite.config.js` so the build runs offline (small visual impact until fonts are self-hosted;
-    fonts are in the deferred visual layer, so confirm before changing).
-  - **Environment:** allowlist `fonts.bunny.net` in the session's network policy — keeps the design
-    unchanged, no code change. (Do not attempt to bypass the 403; it is an org policy denial.)
-  Until E1 is resolved, treat C1/C2 view-test failures as expected infra, not regressions.
+- [x] **E1. RESOLVED (2026-09-25, user-approved).** Removed the build-time remote font fetch from
+  `vite.config.js` (was `bunny('Instrument Sans')` → `fonts.bunny.net`, blocked 403 here). The app
+  now uses its CSS fallback stack; `npm run build` runs offline and produces the manifest. Full
+  suite is green (see C1). To restore the exact typeface later, self-host the woff2 with a local
+  `@font-face` — do not reintroduce a build-time network dependency.
 
 ## Ready for autonomous work
 
@@ -68,18 +62,17 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
 
 ### Verification parity (autonomous, needs the toolchain)
 
-- [~] **C1. Host test baseline in this environment.** Done 2026-09-25: `composer install` OK, key
-  set, `composer run test:host` → **206 passed / 79 failed**; all 79 are the missing-Vite-manifest
-  infra cause (E1), not logic. Recorded in `STATUS.md`. Reaches full green once E1 is resolved.
+- [x] **C1. Host test baseline established (2026-09-25).** After the E1 build fix,
+  `composer run test:host` → **286 passed, 1,716 assertions, exit 0** (in-memory SQLite). F1/F2
+  view tests pass. Recorded in `STATUS.md`.
 - [ ] **C2. Run the PostgreSQL integration suite** (`composer run test:postgres` in the container)
   and record whether the app is PostgreSQL-clean, since SQLite passing does not prove it.
   *Verify:* recorded result; open follow-up tasks for any failures. (Also gated by E1 for view tests.)
 
 ## Needs light user approval (not a big decision, but touches policy/deps)
 
-- [ ] **D1. Commit a frontend lockfile** (`package-lock.json`) to make the JS build reproducible.
-  This pins *existing* deps (no new packages) but changes package management — confirm with user
-  before committing. Flagged in `private-mvp-readiness.md`.
+- [x] **D1. Committed the frontend lockfile** (`package-lock.json`, 2026-09-25, user-approved) to
+  make JS builds reproducible across loop sessions. Pins existing deps; no new packages.
 - [ ] **D2. Reconcile transport-day / beta-baseline docs** that still call transport-day
   "proposed" though routes/views/model/services exist. Low risk, but decide historical-vs-current
   framing with the user.

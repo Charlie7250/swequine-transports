@@ -10,8 +10,10 @@ For the task list see [`BACKLOG.md`](BACKLOG.md). For how to work the loop see
 
 ## One-line state
 
-Private quoting portal: **core code built (routing + pricing + workflow), not yet operator-verified
-or deployed.** Two known code defects (F1, F2) and several human-decision gates block MVP sign-off.
+Private quoting portal: **core code built (routing + pricing + workflow) and the full host suite is
+green (286 tests) after the build fix.** F1/F2 are resolved. Remaining MVP-to-deploy work is gated
+on human decisions (routing provider, hosting/ownership, visual standard, pricing sign-off) plus
+PostgreSQL verification.
 
 ## What is built (confirmed in code)
 
@@ -29,28 +31,20 @@ or deployed.** Two known code defects (F1, F2) and several human-decision gates 
 > Note: the `strategy/vision-and-product-thesis.md` claim that "route mileage is still manual" is
 > **stale** — routing is implemented. Trust this file over it.
 
-## Verification (re-run 2026-09-25 in this cloud sandbox)
+## Verification (2026-09-25, this cloud sandbox — GREEN)
 
-- `composer install` → OK; `.env` created and `APP_KEY` generated.
-- `composer run test:host` → **206 passed, 79 failed** (286 tests). **All 79 failures trace to a
-  single infrastructure cause, not code:** the Vite manifest is missing, so every Blade-rendering
-  test returns 500. No genuine logic failure was found.
-- `npm run build` → **fails**: `vite.config.js` fetches the `Instrument Sans` font from
-  `fonts.bunny.net` at build time, and this environment's egress policy denies that host (403).
-  Without the build there is no `public/build/manifest.json`, hence the 79 view-test failures.
+- `composer install` → OK; `.env` + `APP_KEY` set. `npm ci` reproducible via committed lockfile.
+- `npm run build` → **succeeds offline** after the E1 fix (removed the build-time remote font).
+  Produces `public/build/manifest.json`.
+- `composer run test:host` → **286 passed, 1,716 assertions, exit 0** (in-memory SQLite). Includes
+  the F1 and F2 view tests. No failures.
 
-⚠️ **Top loop-readiness blocker (E1 in BACKLOG):** the frontend build requires outbound font
-egress that is blocked here, so a continuous loop in this environment cannot build assets or run
-view tests. Fix by self-hosting/removing the build-time remote font **or** allowlisting
-`fonts.bunny.net` in the session network policy. Needs a user decision.
+**Not verified:** PostgreSQL runtime (`composer run test:postgres` in container — backlog C2), live
+HERE routing, wider browsers, deployment, operator use. `vendor/`, `node_modules/`, `public/build/`
+and `.env` are gitignored; first-time setup needs `composer install` + `npm ci`.
 
-From earlier B-005 evidence, 2026-09-17 (a build environment where fonts were reachable):
-- `composer run test:host`: 203 tests, 1,417 assertions passing on in-memory SQLite.
-- Frontend build succeeded; 9 synthetic browser walkthroughs reproduced P1 255.90, P2 282.27,
-  P6 240.87, P7 259.39.
-
-**Not verified:** PostgreSQL runtime, live HERE routing, wider browsers, deployment, operator use.
-`vendor/` and `node_modules/` are not committed; a fresh run needs `composer install`.
+Earlier B-005 evidence (2026-09-17) recorded 203 passing and reproduced P1 255.90, P2 282.27,
+P6 240.87, P7 259.39 via synthetic browser walkthroughs.
 
 ## Known defects
 
@@ -81,6 +75,7 @@ See `docs/horse-quotes/release-1/open-decisions.md` (D1–D12) for the full deci
 
 ## Next action
 
-Work `BACKLOG.md` top-down. The first ready autonomous tasks are the F1 and F2 fixes (fully
-specified) and the remaining doc reconciliation. Everything that would reach a real MVP *release*
-is gated on the human decisions above — surface them, don't invent them.
+The autonomous doc + defect + build lane is clear and the suite is green. The next ready autonomous
+task is **C2 — PostgreSQL integration run** (`composer run test:postgres` in the container), the one
+runtime not yet verified. After that, everything reaching a real MVP *release* is gated on the human
+decisions above (H1–H5) — surface them, don't invent them.
