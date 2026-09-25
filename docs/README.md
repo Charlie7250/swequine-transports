@@ -1,5 +1,10 @@
 # Horse Quotes Working Mirror
 
+> **⚠️ This root `docs/*.md` mirror has drifted and is not maintained.** For current work start at
+> `/CLAUDE.md`, then `docs/STATUS.md` and `docs/BACKLOG.md`. For planning detail use
+> `docs/horse-quotes/*` directly — it is the source of truth. This mirror is slated for removal
+> (backlog task A4).
+
 This directory mirrors the approved planning scaffold for day-to-day repo browsing.
 
 The source of truth is `docs/horse-quotes/`.
@@ -30,10 +35,9 @@ The spreadsheet has already been analysed. The app design has been discussed and
 
 ## Spreadsheet analysis inputs
 
-The underlying workbook analysis artefacts live here:
-
-- `work/spreadsheet-analysis/output/summary.json`
-- `work/spreadsheet-analysis/output/contact_sheet.png`
+The original workbook (`Pipeline and Quotes.xlsx`) is **not stored in this repository**. Its
+distilled, approved pricing evidence lives in `docs/workflow/pricing-policy.md` and
+`docs/horse-quotes/calculation-reference.md`.
 
 ## Important constraints
 

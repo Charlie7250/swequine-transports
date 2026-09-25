@@ -1,5 +1,9 @@
 # Release Roadmap
 
+> **⚠️ Read `docs/STATUS.md` for current state before acting.** This roadmap frames releases well,
+> but its status notes predate the current code (routing is now implemented) and its release
+> numbering overlaps other task lists. `docs/BACKLOG.md` is the single authoritative task list.
+
 ## Roadmap purpose
 
 This roadmap resets the project around real product readiness.

@@ -28,10 +28,9 @@ The spreadsheet has already been analysed. The app design has been discussed and
 
 ## Spreadsheet analysis inputs
 
-The underlying workbook analysis artefacts live here:
-
-- `work/spreadsheet-analysis/output/summary.json`
-- `work/spreadsheet-analysis/output/contact_sheet.png`
+The original workbook (`Pipeline and Quotes.xlsx`) is **not stored in this repository**. Its
+distilled, approved pricing evidence lives in `docs/workflow/pricing-policy.md` and
+`docs/horse-quotes/calculation-reference.md`.
 
 ## Important constraints
 

@@ -70,7 +70,9 @@ Get to this state first:
 
 ## Handoff note
 
-If the implementation chat needs spreadsheet evidence, the prior workbook analysis lives at:
+**Start from `docs/STATUS.md` and `docs/BACKLOG.md`** — they hold the current state and the single
+task list. This brief predates them and is kept for background only.
 
-- `work/spreadsheet-analysis/output/summary.json`
-- `work/spreadsheet-analysis/output/contact_sheet.png`
+The original workbook analysis (`Pipeline and Quotes.xlsx`) is **not stored in this repository**.
+Its distilled, approved pricing evidence now lives in
+`docs/workflow/pricing-policy.md` and `docs/horse-quotes/calculation-reference.md`.
