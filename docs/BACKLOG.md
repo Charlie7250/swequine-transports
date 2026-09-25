@@ -30,14 +30,14 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
 - [x] **A3. Fix broken handoff references.** Repointed both `next-chat-brief.md` files and
   `docs/horse-quotes/README.md` away from the non-existent `work/spreadsheet-analysis/*` paths to
   `docs/STATUS.md` / `docs/BACKLOG.md` and the canonical pricing docs.
-- [ ] **A4. Reconcile the root `docs/*.md` mirror.** It has drifted from `docs/horse-quotes/*`
-  (6/7 files differ). Either delete the root mirror and update inbound links
-  (`docs/workflow/index.md`, root `README.md`), or regenerate it verbatim from `docs/horse-quotes/*`.
-  Recommend **delete**. *Verify:* no drifted duplicate remains; links resolve.
-- [ ] **A5. Reconcile the calculation-reference legacy numbers.** `docs/horse-quotes/calculation-reference.md`
-  shows base cost £0.41 / totals that disagree with canonical `pricing-policy.md` (base cost
-  0.365736). Correct the legacy doc to match the canonical examples, or banner it as superseded by
-  `docs/workflow/pricing-policy.md`. *Verify:* no contradictory pricing example presented as current.
+- [x] **A4. Reconcile the root `docs/*.md` mirror.** Deleted the 8 drifted mirror files
+  (README, project-brief, technical-decisions, domain-rules, calculation-reference,
+  design-direction, build-sequence, next-chat-brief). Updated inbound links in root `README.md`
+  and `docs/workflow/index.md`. `docs/horse-quotes/*` is now the sole planning source.
+- [x] **A5. Reconcile the calculation-reference legacy numbers.** Bannered
+  `docs/horse-quotes/calculation-reference.md` as subordinate to canonical `pricing-policy.md` and
+  corrected the worked-example JSON to the canonical P1 figures (six-decimal rates, one-horse
+  multiplier, engine total 255.90).
 
 ### Code defects (fully specified in `docs/workflow/current-batch.md`)
 

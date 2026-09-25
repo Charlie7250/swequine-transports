@@ -12,20 +12,15 @@ This is the standalone internal Laravel app that replaces the spreadsheet-driven
 - Docker Compose for the default local runtime
 - Minimal JavaScript
 
-## Approved planning docs
+## Where to start
 
-The approved source-of-truth docs live in:
+- `CLAUDE.md` — the single entry point (read first).
+- `docs/STATUS.md` — live current state.
+- `docs/BACKLOG.md` — the one task list.
 
-- `docs/horse-quotes/README.md`
-- `docs/horse-quotes/project-brief.md`
-- `docs/horse-quotes/technical-decisions.md`
-- `docs/horse-quotes/domain-rules.md`
-- `docs/horse-quotes/calculation-reference.md`
-- `docs/horse-quotes/design-direction.md`
-- `docs/horse-quotes/build-sequence.md`
-- `docs/horse-quotes/next-chat-brief.md`
-
-The files in `docs/*.md` are working mirrors for convenience. If wording drifts, `docs/horse-quotes/*` wins.
+Planning-detail source of truth lives in `docs/horse-quotes/*` (project brief, technical
+decisions, domain rules, calculation reference, design direction, build sequence). Governance,
+canonical intent, and pricing policy live in `docs/workflow/*`.
 
 ## Current milestone
 
