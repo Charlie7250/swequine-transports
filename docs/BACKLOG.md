@@ -42,6 +42,10 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
   (README, project-brief, technical-decisions, domain-rules, calculation-reference,
   design-direction, build-sequence, next-chat-brief). Updated inbound links in root `README.md`
   and `docs/workflow/index.md`. `docs/horse-quotes/*` is now the sole planning source.
+- [x] **A6. Close out the B-005 governance record.** Added a dated "Post-r3 Evidence Update" to
+  `docs/workflow/current-batch.md` recording that F1/F2 are resolved-in-tree, test-covered, and
+  verified green (host 286, PG 15), so the governance layer no longer contradicts `STATUS.md`.
+  Framed as evidence, not B-005 acceptance (which still needs a user decision).
 - [x] **A5. Reconcile the calculation-reference legacy numbers.** Bannered
   `docs/horse-quotes/calculation-reference.md` as subordinate to canonical `pricing-policy.md` and
   corrected the worked-example JSON to the canonical P1 figures (six-decimal rates, one-horse
