@@ -65,9 +65,12 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
 - [x] **C1. Host test baseline established (2026-09-25).** After the E1 build fix,
   `composer run test:host` → **286 passed, 1,716 assertions, exit 0** (in-memory SQLite). F1/F2
   view tests pass. Recorded in `STATUS.md`.
-- [ ] **C2. Run the PostgreSQL integration suite** (`composer run test:postgres` in the container)
-  and record whether the app is PostgreSQL-clean, since SQLite passing does not prove it.
-  *Verify:* recorded result; open follow-up tasks for any failures. (Also gated by E1 for view tests.)
+- [x] **C2. PostgreSQL integration suite green (2026-09-25).** Ran against a local PostgreSQL 16
+  instance (no docker daemon here; started the `16 main` cluster, created role `sweq` + db
+  `sweq_transports_test`, mapped host `postgres`→127.0.0.1). `composer run test:postgres` →
+  **15 passed, 60 assertions, exit 0**. Note: this suite only covers `tests/Integration/Postgres`
+  (the legacy-import workflow); the broader app suite still runs on SQLite. Full PostgreSQL parity
+  for all feature paths remains a later hardening item if desired.
 
 ## Needs light user approval (not a big decision, but touches policy/deps)
 

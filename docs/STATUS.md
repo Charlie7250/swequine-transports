@@ -39,9 +39,13 @@ PostgreSQL verification.
 - `composer run test:host` → **286 passed, 1,716 assertions, exit 0** (in-memory SQLite). Includes
   the F1 and F2 view tests. No failures.
 
-**Not verified:** PostgreSQL runtime (`composer run test:postgres` in container — backlog C2), live
-HERE routing, wider browsers, deployment, operator use. `vendor/`, `node_modules/`, `public/build/`
-and `.env` are gitignored; first-time setup needs `composer install` + `npm ci`.
+- `composer run test:postgres` → **15 passed, 60 assertions, exit 0** against a local PostgreSQL 16
+  instance (covers `tests/Integration/Postgres` — the legacy-import workflow). The broader app suite
+  still runs on SQLite; full PostgreSQL parity for all feature paths is a later hardening item.
+
+**Not verified:** live HERE routing (needs provider — H1), wider browsers, deployment, operator use.
+`vendor/`, `node_modules/`, `public/build/` and `.env` are gitignored; first-time setup needs
+`composer install` + `npm ci`. Local PostgreSQL for C2 is set up per BACKLOG C2 (not committed).
 
 Earlier B-005 evidence (2026-09-17) recorded 203 passing and reproduced P1 255.90, P2 282.27,
 P6 240.87, P7 259.39 via synthetic browser walkthroughs.
@@ -75,7 +79,8 @@ See `docs/horse-quotes/release-1/open-decisions.md` (D1–D12) for the full deci
 
 ## Next action
 
-The autonomous doc + defect + build lane is clear and the suite is green. The next ready autonomous
-task is **C2 — PostgreSQL integration run** (`composer run test:postgres` in the container), the one
-runtime not yet verified. After that, everything reaching a real MVP *release* is gated on the human
-decisions above (H1–H5) — surface them, don't invent them.
+The autonomous lane is clear: docs reconciled, F1/F2 verified, host suite (286) and PostgreSQL
+integration suite (15) both green, build works offline. **Everything remaining to reach a real MVP
+release is gated on human decisions (H1–H5 in BACKLOG)** — routing provider, hosting/ownership,
+visual standard, pricing sign-off, trial approval. A loop should surface the next gate, not invent
+answers. Optional later autonomous hardening: full PostgreSQL parity for all feature paths.
