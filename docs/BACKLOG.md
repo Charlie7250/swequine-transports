@@ -16,6 +16,20 @@ Tasks are `[ ]` todo, `[~]` in progress, `[x]` done. Keep this file honest.
 
 ---
 
+## ⚠️ E1 — Loop blocker: frontend build fails under restricted egress (needs a decision)
+
+- [ ] **E1. Make the frontend build work in the loop environment.** `vite.config.js` fetches the
+  `Instrument Sans` font from `fonts.bunny.net` at build time; this session's egress policy denies
+  that host (403), so `npm run build` fails, no `public/build/manifest.json` is produced, and ~79
+  view-rendering tests 500. **This blocks all loop verification of any view.** Two clean fixes, one
+  is the user's to pick:
+  - **Code:** self-host the font (bundle the woff2 + local `@font-face`) or drop the `fonts` block
+    from `vite.config.js` so the build runs offline (small visual impact until fonts are self-hosted;
+    fonts are in the deferred visual layer, so confirm before changing).
+  - **Environment:** allowlist `fonts.bunny.net` in the session's network policy — keeps the design
+    unchanged, no code change. (Do not attempt to bypass the 403; it is an org policy denial.)
+  Until E1 is resolved, treat C1/C2 view-test failures as expected infra, not regressions.
+
 ## Ready for autonomous work
 
 Ordered by priority. Each is self-contained and verifiable without a human decision.
@@ -41,27 +55,25 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
 
 ### Code defects (fully specified in `docs/workflow/current-batch.md`)
 
-- [ ] **B1. Fix F1 — visible manual-review guidance for unsupported horse counts.**
-  Route-review must show a clear manual-review message and offer no automatic-pricing action for
-  counts >2, while creating no job/revision/leg/allocation/audit write. Spec + acceptance (A2–A4,
-  A8) in `current-batch.md`. Test-first: `tests/Feature/Quotes/RouteFirstTransportQuoteFlowTest.php`.
-  *Verify:* new failing test first, then `composer run test:host` green.
-- [ ] **B2. Fix F2 — allow issuing an explicitly-corrected-fuel draft without activating the record.**
-  A draft that explicitly selected a corrected fuel record passes the issue checklist; the record
-  stays inactive; the active default is unchanged; an *un*selected inactive context stays blocked.
-  Spec + acceptance (A5–A9) in `current-batch.md`. Tests:
-  `QuoteWorkspaceTest.php`, `IssuedQuoteOutputTest.php`. *Verify:* failing test first, then
-  `composer run test:host` green. **Check the schema assumption first** (revisions may lack a
-  correction-provenance field — see current-batch "Risks"); if a schema change is needed, stop and
-  flag rather than widening scope.
+- [x] **B1. F1 — visible manual-review guidance for unsupported horse counts.** Already implemented
+  in tree: `app/Services/Intake/TransportEnquiryRouteReview.php` +
+  `resources/views/transport-enquiries/route-review.blade.php`, covered by
+  `RouteFirstTransportQuoteFlowTest` (blocked action + visible message). Green run pending **E1**
+  (test renders a view). No further code change needed.
+- [x] **B2. F2 — issue an explicitly-corrected-fuel draft without activating the record.** Already
+  implemented: `app/Services/Quotes/IssuedQuoteChecklist.php::hasEligiblePricingContext()`, covered
+  by `QuoteWorkspaceTest` + `IssuedQuoteOutputTest` (incl. the negative case). Green run pending
+  **E1**. No further code change needed. (No schema change was required — provenance lives in
+  `calculation_explanation.fuel_context`.)
 
 ### Verification parity (autonomous, needs the toolchain)
 
-- [ ] **C1. Re-establish the host test baseline in this environment.** Run `composer install`, then
-  `composer run test:host`; record pass/fail counts in `STATUS.md`. *Verify:* recorded result.
+- [~] **C1. Host test baseline in this environment.** Done 2026-09-25: `composer install` OK, key
+  set, `composer run test:host` → **206 passed / 79 failed**; all 79 are the missing-Vite-manifest
+  infra cause (E1), not logic. Recorded in `STATUS.md`. Reaches full green once E1 is resolved.
 - [ ] **C2. Run the PostgreSQL integration suite** (`composer run test:postgres` in the container)
   and record whether the app is PostgreSQL-clean, since SQLite passing does not prove it.
-  *Verify:* recorded result; open follow-up tasks for any failures.
+  *Verify:* recorded result; open follow-up tasks for any failures. (Also gated by E1 for view tests.)
 
 ## Needs light user approval (not a big decision, but touches policy/deps)
 

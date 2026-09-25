@@ -29,29 +29,44 @@ or deployed.** Two known code defects (F1, F2) and several human-decision gates 
 > Note: the `strategy/vision-and-product-thesis.md` claim that "route mileage is still manual" is
 > **stale** — routing is implemented. Trust this file over it.
 
-## Last recorded verification (not re-run this session)
+## Verification (re-run 2026-09-25 in this cloud sandbox)
 
-From B-005 evidence, 2026-09-17:
-- `composer run test:host`: **203 tests, 1,417 assertions passing** on in-memory SQLite.
-- Frontend production build (`npm run build`): succeeded.
-- 9 synthetic browser walkthroughs on disposable SQLite + a loopback routing fixture: expected
-  totals reproduced (P1 255.90, P2 282.27, P6 240.87, P7 259.39).
+- `composer install` → OK; `.env` created and `APP_KEY` generated.
+- `composer run test:host` → **206 passed, 79 failed** (286 tests). **All 79 failures trace to a
+  single infrastructure cause, not code:** the Vite manifest is missing, so every Blade-rendering
+  test returns 500. No genuine logic failure was found.
+- `npm run build` → **fails**: `vite.config.js` fetches the `Instrument Sans` font from
+  `fonts.bunny.net` at build time, and this environment's egress policy denies that host (403).
+  Without the build there is no `public/build/manifest.json`, hence the 79 view-test failures.
+
+⚠️ **Top loop-readiness blocker (E1 in BACKLOG):** the frontend build requires outbound font
+egress that is blocked here, so a continuous loop in this environment cannot build assets or run
+view tests. Fix by self-hosting/removing the build-time remote font **or** allowlisting
+`fonts.bunny.net` in the session network policy. Needs a user decision.
+
+From earlier B-005 evidence, 2026-09-17 (a build environment where fonts were reachable):
+- `composer run test:host`: 203 tests, 1,417 assertions passing on in-memory SQLite.
+- Frontend build succeeded; 9 synthetic browser walkthroughs reproduced P1 255.90, P2 282.27,
+  P6 240.87, P7 259.39.
 
 **Not verified:** PostgreSQL runtime, live HERE routing, wider browsers, deployment, operator use.
-`vendor/` is not committed; a fresh run needs `composer install`.
+`vendor/` and `node_modules/` are not committed; a fresh run needs `composer install`.
 
-## Known defects (autonomous fixes available — see BACKLOG)
+## Known defects
 
-- **F1** — an unsupported horse count (>2) correctly blocks an automatic quote but shows **no
-  visible manual-review message** on the route-review page. Full spec:
-  `docs/workflow/current-batch.md` (B-005 r3, F1).
-- **F2** — a corrected-fuel draft **cannot pass the issue checklist** while its selected corrected
-  fuel record is inactive, so a correction can't be issued without activating the record. Full spec:
-  same file, F2.
-- **F3** — durable screenshot capture for walkthrough evidence was previously unavailable (tooling
-  gap, may already be solvable here). Full spec: same file, F3.
-- **F4** (Minor) — build warns that optional package `fontaine` is absent. No fix authorised;
-  leave as-is.
+- **F1 — RESOLVED in tree (2026-09-25 review).** `TransportEnquiryRouteReview.php` sets
+  `requiresManualPricingReview` for counts >2 and blocks the accept action; the route-review view
+  shows "Automatic transport pricing supports one or two horses. Counts above two require manual
+  review." Covered by `RouteFirstTransportQuoteFlowTest` (asserts blocked action + visible text).
+  Full green run pending E1 (view test needs the build).
+- **F2 — RESOLVED in tree (2026-09-25 review).** `IssuedQuoteChecklist::hasEligiblePricingContext()`
+  accepts an explicit corrected-fuel selection without activating the record; the active default is
+  untouched and unselected inactive context stays blocked. Covered by `QuoteWorkspaceTest` and
+  `IssuedQuoteOutputTest` (incl. negative case). Full green run pending E1.
+  > The `docs/workflow/current-batch.md` B-005 narrative still lists F1/F2 as open because it was
+  > written mid-r3; the r3 fixes have since landed. That governance record needs a closing note.
+- **F4** (Minor) — build warns optional package `fontaine` is absent. No fix authorised; leave as-is.
+- **E1 (blocker)** — frontend build fails under restricted egress (font host 403). See above.
 
 ## Blocked on human decision (no autonomous path — do NOT guess)
 
