@@ -98,7 +98,7 @@ These links provide discovery evidence and historical planning context. Their ex
 | Subject | Existing reference |
 | --- | --- |
 | Existing documentation entry point | [Horse Quotes documentation](../horse-quotes/README.md) |
-| Earlier mirror relationship | [Documentation mirror](../README.md) |
+| Planning-detail source of truth | [Horse Quotes docs](../horse-quotes/README.md) |
 | Product and domain | [Project brief](../horse-quotes/project-brief.md), [domain rules](../horse-quotes/domain-rules.md) |
 | Pricing evidence | [Calculation reference](../horse-quotes/calculation-reference.md) |
 | Technology and local development | [Technical decisions](../horse-quotes/technical-decisions.md), [local development](../local-development.md) |

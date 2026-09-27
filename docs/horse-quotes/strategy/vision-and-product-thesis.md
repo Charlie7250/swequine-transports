@@ -1,5 +1,10 @@
 # Vision And Product Thesis
 
+> **⚠️ Partly stale — read `docs/STATUS.md` for current state.** This doc predates the current
+> code. Its claim that "route mileage is still manual" is **no longer true**: automatic postcode
+> routing is implemented (`app/Services/Routing/HereRouteDistanceAdapter.php`). Trust this file for
+> *product vision and commercial thesis*, not for "what the app does today."
+
 ## Product vision
 
 Build the best horse-transporter operating system for small and mid-sized transport businesses that currently lose time, confidence, and enquiries to manual quoting and fragmented lead handling.

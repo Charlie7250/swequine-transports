@@ -1,5 +1,11 @@
 # Calculation Reference
 
+> **⚠️ Pricing authority is `docs/workflow/pricing-policy.md` (r2).** This document captures the
+> early spreadsheet reverse-engineering. Where numbers here differ from the canonical policy, the
+> policy wins — it uses six-decimal rates and the approved horse-count multipliers (1.5 one-horse,
+> 1.75 two-horse). The worked example below has been corrected to the canonical P1 figures; treat
+> it as illustrative of the payload *shape*, not as an independent rate source.
+
 ## Purpose
 
 This document captures what the spreadsheet appears to be doing so the pricing engine can be built transparently and revised safely.
@@ -94,45 +100,47 @@ Suggested shape:
     "source": "manual_texaco_entry",
     "price_per_litre_inc_vat": 1.53
   },
+  "horse_count": 1,
   "rate_inputs": {
     "miles_per_gallon": 22,
     "litres_per_gallon": 4.54,
     "maintenance_per_mile": 0.05,
     "unloaded_add_on": 0.5555555556,
-    "loaded_add_on": 0.8064516129
+    "loaded_add_on": 0.8064516129,
+    "loaded_rate_multiplier": 1.5
   },
   "resolved_rates": {
-    "base_cost_per_mile": 0.41,
-    "unloaded_rate_per_mile": 0.97,
-    "loaded_rate_per_mile": 1.22
+    "base_cost_per_mile": 0.365736,
+    "unloaded_rate_per_mile": 0.921292,
+    "loaded_rate_per_mile": 1.758282
   },
   "legs": [
     {
       "label": "depot_to_pickup",
       "miles": 10,
       "rate_type": "unloaded",
-      "rate_per_mile": 0.97,
-      "amount": 9.7
+      "rate_per_mile": 0.921292,
+      "amount": 9.21
     },
     {
       "label": "pickup_to_dropoff",
       "miles": 90,
       "rate_type": "loaded",
-      "rate_per_mile": 1.22,
-      "amount": 109.8
+      "rate_per_mile": 1.758282,
+      "amount": 158.25
     },
     {
       "label": "dropoff_to_depot",
       "miles": 96,
       "rate_type": "unloaded",
-      "rate_per_mile": 0.97,
-      "amount": 93.12
+      "rate_per_mile": 0.921292,
+      "amount": 88.44
     }
   ],
   "extras": [],
   "overrides": [],
-  "engine_total": 212.62,
-  "final_total": 212.62
+  "engine_total": 255.90,
+  "final_total": 255.90
 }
 ```
 

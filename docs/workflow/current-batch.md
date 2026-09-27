@@ -522,3 +522,29 @@ Workflow approval wording:
 
 No outcome is ready for acceptance while Important findings and pending criteria remain.
 No acceptance record or accepted outcome identity exists for B-005.
+
+## Post-r3 Evidence Update (2026-09-25)
+
+This is a factual evidence update, not a B-005 acceptance. Acceptance still requires a separate
+explicit user decision, and the deferred visual-quality gate still blocks any operator trial.
+
+Findings F1 and F2 are now resolved in the working tree, with test coverage, and verified green:
+
+- **F1** — `app/Services/Intake/TransportEnquiryRouteReview.php` sets `requiresManualPricingReview`
+  for horse counts above two and withholds the automatic-pricing action;
+  `resources/views/transport-enquiries/route-review.blade.php` shows the manual-review message.
+  Covered by `tests/Feature/Quotes/RouteFirstTransportQuoteFlowTest.php` (blocked action + visible
+  guidance). This satisfies the intent of criteria A8/A3-A4 at the code level.
+- **F2** — `app/Services/Quotes/IssuedQuoteChecklist.php::hasEligiblePricingContext()` accepts an
+  explicit corrected-fuel selection (`calculation_explanation.fuel_context.selection_type ==
+  explicit_correction` matching the stored `weekly_fuel_price_id`) without activating the record;
+  the active default is unchanged and an unselected inactive context stays blocked. Covered by
+  `tests/Feature/Quotes/QuoteWorkspaceTest.php` and `tests/Feature/Quotes/IssuedQuoteOutputTest.php`
+  (including the negative case). No schema change was required.
+
+Verification on 2026-09-25: `composer run test:host` → 286 passed, 1,716 assertions, exit 0;
+`composer run test:postgres` → 15 passed, 60 assertions, exit 0. The frontend build now runs
+offline after the E1 fix (removed the build-time remote font from `vite.config.js`).
+
+F3 (durable screenshots) is unrelated to these two fixes and is not addressed by this update.
+Live current state is tracked in `docs/STATUS.md`; the single task list is `docs/BACKLOG.md`.
