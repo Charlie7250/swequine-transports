@@ -66,6 +66,10 @@ scheduled stop **times** (jobs store no times) · the word "Home" for depot (use
 horse **names** · driver or vehicle assignment · a Customers / Horses / Vehicles / Reports / Calendar
 page or nav item · map imagery. Journeys are identified by **UK postcodes**, not town/place names.
 
+> Several of these are **wanted** future features (search, notifications, date sorting, job times,
+> route optimisation) — tracked in `docs/product/proposed-enhancements.md`. They're excluded from
+> *these* designs only so today's screens stay wireable; design them in once each is approved.
+
 ### Placeholder cast (reuse for consistency)
 
 - **Operator (signed in):** Cliff Edwards · South West Equine Services.
