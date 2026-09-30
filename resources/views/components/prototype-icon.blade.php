@@ -69,6 +69,14 @@
         @case('arrow')
             <path d="m9 18 6-6-6-6" />
             @break
+        @case('search')
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+            @break
+        @case('bell')
+            <path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6" />
+            <path d="M10 20a2 2 0 0 0 4 0" />
+            @break
         @default
             <circle cx="12" cy="12" r="9" />
     @endswitch

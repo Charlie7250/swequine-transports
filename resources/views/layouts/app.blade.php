@@ -7,19 +7,23 @@
         <style>
             :root {
                 color-scheme: light;
-                --navy-950: #0f1b2d;
-                --navy-900: #16243a;
-                --navy-800: #24334d;
-                --gold-500: #b78b2f;
-                --gold-300: #d8bf78;
-                --stone-50: #f7f4ef;
-                --stone-100: #ece7de;
-                --stone-300: #c9c0b2;
-                --ink-900: #1c1b18;
-                --ink-700: #4d4a44;
-                --danger-600: #a6402e;
-                --surface-shadow: 0 18px 42px rgba(15, 27, 45, 0.12);
-                font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+                --navy-950: var(--prototype-navy-1000, #081625);
+                --navy-900: var(--prototype-navy-900, #10243a);
+                --navy-800: var(--prototype-navy-800, #17324d);
+                --gold-700: var(--prototype-gold-700, #8c661d);
+                --gold-600: var(--prototype-gold-600, #a57a23);
+                --gold-500: var(--prototype-gold-500, #be9134);
+                --gold-300: var(--prototype-gold-300, #e4c779);
+                --paper: var(--prototype-paper, #fffefa);
+                --stone-50: var(--prototype-cream-50, #fbf9f4);
+                --stone-100: var(--prototype-stone-100, #f0ece4);
+                --stone-200: var(--prototype-stone-200, #e7e1d7);
+                --stone-300: var(--prototype-stone-300, #d8d2c7);
+                --ink-900: var(--prototype-ink, #18283c);
+                --ink-700: var(--prototype-muted, #687386);
+                --danger-600: var(--prototype-red, #8a3232);
+                --surface-shadow: var(--prototype-shadow, 0 18px 45px rgba(17, 31, 49, 0.08));
+                font-family: Georgia, "Times New Roman", serif;
             }
 
             * {
@@ -32,7 +36,7 @@
                     radial-gradient(circle at top right, rgba(183, 139, 47, 0.22), transparent 32%),
                     linear-gradient(180deg, #fbfaf7 0%, var(--stone-50) 100%);
                 color: var(--ink-900);
-                font-family: "Avenir Next", "Segoe UI", sans-serif;
+                font-family: "Instrument Sans", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
             }
 
             a {
@@ -81,7 +85,7 @@
                 background: linear-gradient(135deg, rgba(216, 191, 120, 0.2), rgba(216, 191, 120, 0.45));
                 border: 1px solid rgba(216, 191, 120, 0.5);
                 font-size: 1.2rem;
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
             }
 
             .brand-copy {
@@ -133,9 +137,17 @@
             }
 
             .hero {
-                background: rgba(255, 255, 255, 0.78);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(36, 51, 77, 0.09);
+                background: transparent;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0.5rem 0 0;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero--legacy {
+                background: var(--paper);
+                border: 1px solid var(--stone-200);
                 border-radius: 1.5rem;
                 box-shadow: var(--surface-shadow);
                 padding: 1.5rem;
@@ -159,7 +171,7 @@
             .page-title {
                 margin: 1rem 0 0.4rem;
                 font-size: clamp(2rem, 4vw, 3rem);
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
                 line-height: 1.05;
             }
 
@@ -179,7 +191,7 @@
             .panel,
             .metric,
             .form-panel {
-                background: rgba(255, 255, 255, 0.92);
+                background: var(--paper);
                 border: 1px solid rgba(36, 51, 77, 0.09);
                 border-radius: 1.2rem;
                 box-shadow: var(--surface-shadow);
@@ -200,7 +212,7 @@
             .metric-value {
                 margin-top: 0.55rem;
                 font-size: 2rem;
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
                 color: var(--navy-950);
             }
 
@@ -225,7 +237,7 @@
             .section-title {
                 margin: 0 0 0.9rem;
                 font-size: 1.2rem;
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
             }
 
             .section-copy {
@@ -314,9 +326,13 @@
             }
 
             .button-primary {
-                background: linear-gradient(135deg, var(--gold-500), var(--gold-300));
-                color: var(--navy-950);
-                box-shadow: 0 14px 28px rgba(183, 139, 47, 0.28);
+                background: var(--gold-600);
+                color: #fffdf7;
+                box-shadow: 0 12px 24px rgba(140, 102, 29, 0.20);
+            }
+
+            .button-primary:hover {
+                background: var(--gold-700);
             }
 
             .button-secondary {
@@ -326,9 +342,13 @@
             }
 
             .button-outline {
-                background: rgba(36, 51, 77, 0.06);
-                color: var(--navy-900);
-                border: 1px solid rgba(36, 51, 77, 0.12);
+                background: var(--paper);
+                color: var(--gold-700);
+                border: 1px solid var(--stone-300);
+            }
+
+            .button-outline:hover {
+                border-color: var(--gold-500);
             }
 
             .error-banner {
@@ -401,13 +421,13 @@
             }
 
             .badge-active {
-                background: rgba(32, 88, 53, 0.1);
-                color: #205835;
+                background: var(--prototype-green-bg, #e4f2e4);
+                color: var(--prototype-green, #27643b);
             }
 
             .badge-muted {
-                background: rgba(36, 51, 77, 0.08);
-                color: var(--ink-700);
+                background: var(--prototype-grey-bg, #eceef1);
+                color: var(--prototype-grey, #555f6d);
             }
 
             .page-heading {
@@ -417,7 +437,7 @@
             .page-heading-title {
                 margin: 0;
                 font-size: 1.65rem;
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
                 line-height: 1.15;
                 color: var(--navy-950);
             }
@@ -436,7 +456,7 @@
             }
 
             .stat {
-                background: rgba(255, 255, 255, 0.92);
+                background: var(--paper);
                 border: 1px solid rgba(36, 51, 77, 0.09);
                 border-radius: 1rem;
                 padding: 0.8rem 1rem;
@@ -453,7 +473,7 @@
             .stat-value {
                 margin-top: 0.3rem;
                 font-size: 1.5rem;
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
                 color: var(--navy-950);
             }
 
@@ -492,12 +512,20 @@
                 font-size: 0.85rem;
             }
 
-            .status-badge--draft { background: rgba(36, 51, 77, 0.06); color: #4d4a44; }
-            .status-badge--quoted { background: rgba(55, 138, 221, 0.10); color: #0c447c; }
-            .status-badge--pending { background: rgba(239, 159, 39, 0.12); color: #633806; }
-            .status-badge--booked { background: rgba(29, 158, 117, 0.12); color: #085041; }
-            .status-badge--completed { background: rgba(99, 153, 34, 0.12); color: #27500a; }
-            .status-badge--lost { background: rgba(166, 64, 46, 0.10); color: #791f1f; }
+            .status-badge { display: inline-flex; align-items: center; gap: 0.4rem; }
+            .status-badge::before {
+                content: "";
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 999px;
+                background: currentColor;
+            }
+            .status-badge--draft { background: var(--prototype-grey-bg, #eceef1); color: var(--prototype-grey, #555f6d); }
+            .status-badge--quoted { background: var(--prototype-blue-bg, #e4edfc); color: var(--prototype-blue, #275aa2); }
+            .status-badge--pending { background: var(--prototype-amber-bg, #fff1cf); color: var(--prototype-amber, #8a5b05); }
+            .status-badge--booked { background: #e6e9f7; color: #3a4a8c; }
+            .status-badge--completed { background: var(--prototype-green-bg, #e4f2e4); color: var(--prototype-green, #27643b); }
+            .status-badge--lost { background: var(--prototype-red-bg, #f7e5e2); color: var(--prototype-red, #8a3232); }
 
             .status-badge--lg {
                 font-size: 0.95rem;
@@ -559,7 +587,7 @@
 
             .status-chip-count {
                 font-size: 1.6rem;
-                font-family: "Iowan Old Style", Georgia, serif;
+                font-family: Georgia, "Times New Roman", serif;
             }
 
             .data-table {
@@ -569,18 +597,30 @@
 
             .data-table th,
             .data-table td {
-                padding: 0.85rem 0.75rem;
-                border-bottom: 1px solid rgba(36, 51, 77, 0.09);
+                padding: 0.85rem 0.9rem;
+                border-bottom: 1px solid var(--stone-200);
                 text-align: left;
-                vertical-align: top;
+                vertical-align: middle;
             }
 
-            .data-table th {
+            .data-table thead th {
+                background: var(--stone-100);
                 color: var(--ink-700);
-                font-size: 0.8rem;
+                font-family: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+                font-size: 0.78rem;
                 font-weight: 700;
                 letter-spacing: 0.06em;
                 text-transform: uppercase;
+            }
+
+            .data-table thead th:first-child {
+                border-top-left-radius: 0.75rem;
+                border-bottom-left-radius: 0.75rem;
+            }
+
+            .data-table thead th:last-child {
+                border-top-right-radius: 0.75rem;
+                border-bottom-right-radius: 0.75rem;
             }
 
             .data-table tr:last-child td {
@@ -682,6 +722,111 @@
                     flex-direction: column;
                     gap: 0.2rem;
                 }
+            }
+
+            /* --- Mockup-aligned refinements --- */
+            input[type="text"]:focus,
+            input[type="number"]:focus,
+            input[type="date"]:focus,
+            input[type="email"]:focus,
+            input[type="password"]:focus,
+            select:focus,
+            textarea:focus {
+                outline: none;
+                border-color: var(--gold-500);
+                box-shadow: 0 0 0 3px rgba(190, 145, 52, 0.15);
+            }
+
+            .section-title {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+            }
+
+            .section-icon {
+                display: inline-grid;
+                place-items: center;
+                width: 1.9rem;
+                height: 1.9rem;
+                border-radius: 0.6rem;
+                background: rgba(190, 145, 52, 0.12);
+                color: var(--gold-700);
+                flex: none;
+            }
+
+            .section-icon svg { width: 1.05rem; height: 1.05rem; }
+
+            .metric--accent {
+                border-color: rgba(190, 145, 52, 0.55);
+                box-shadow: 0 12px 30px rgba(190, 145, 52, 0.12);
+                background:
+                    linear-gradient(0deg, rgba(190, 145, 52, 0.06), rgba(190, 145, 52, 0.06)),
+                    var(--paper);
+            }
+
+            .metric-value--accent { color: var(--navy-950); }
+
+            /* Bordered icon table actions (Up / Down / Adjust / Remove) */
+            .table-actions .button-inline {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                padding: 0.45rem 0.7rem;
+                border: 1px solid var(--stone-300);
+                border-radius: 0.6rem;
+                background: var(--paper);
+                color: var(--navy-900);
+            }
+
+            .table-actions .button-inline:hover:not(:disabled) {
+                border-color: var(--gold-500);
+                color: var(--gold-700);
+            }
+
+            .table-actions .button-inline:disabled {
+                opacity: 0.45;
+                cursor: not-allowed;
+            }
+
+            /* Depot start / finish route endpoints strip */
+            .route-endpoints {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px dashed var(--stone-300);
+                color: var(--ink-700);
+                font-size: 0.9rem;
+            }
+
+            .route-endpoint {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                font-weight: 600;
+                color: var(--navy-900);
+            }
+
+            /* Sticky mobile primary action bar */
+            .mobile-action-bar { display: none; }
+
+            @media (max-width: 720px) {
+                .mobile-action-bar {
+                    position: sticky;
+                    bottom: 0;
+                    display: flex;
+                    gap: 0.6rem;
+                    margin: 1rem -1rem -1rem;
+                    padding: 0.85rem 1rem;
+                    background: color-mix(in srgb, var(--paper) 92%, transparent);
+                    border-top: 1px solid var(--stone-200);
+                    backdrop-filter: blur(8px);
+                }
+
+                .mobile-action-bar .button { flex: 1; justify-content: center; }
             }
         </style>
         @vite('resources/css/app.css')
