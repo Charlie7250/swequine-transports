@@ -2,11 +2,17 @@
 
 @section('content')
     <main class="page auth-shell">
+        <div class="auth-brand">
+            <x-brand-logo :size="150" />
+            <span class="auth-brand-name">South West</span>
+            <span class="auth-brand-subtitle">Equine Services</span>
+        </div>
+
         <section class="form-panel">
             <span class="eyebrow">Internal access</span>
             <h1 class="page-title">Sign in to the quotes workspace</h1>
             <p class="page-copy">
-                This first release keeps pricing logic transparent, revisioned, and separate from the spreadsheet.
+                Access transparent, revisioned pricing and your transport enquiries.
             </p>
 
             @if ($errors->any())
@@ -25,7 +31,11 @@
 
                 <label for="password">
                     Password
-                    <input id="password" name="password" type="password" required autocomplete="current-password">
+                    <span class="password-field">
+                        <input id="password" name="password" type="password" required autocomplete="current-password">
+                        <button class="password-toggle" type="button" aria-controls="password" aria-label="Show password"
+                            onclick="const f=document.getElementById('password');const show=f.type==='password';f.type=show?'text':'password';this.textContent=show?'Hide':'Show';this.setAttribute('aria-label',show?'Hide password':'Show password');">Show</button>
+                    </span>
                 </label>
 
                 <label class="inline-row" for="remember">

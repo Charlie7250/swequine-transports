@@ -18,7 +18,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Location review</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Location review</h2>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -45,7 +45,7 @@
 
         @if ($routeIssues !== [])
             <section class="panel">
-                <h2 class="section-title">Route issues</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Route issues</h2>
                 <ul class="bullet-list">
                     @foreach ($routeIssues as $issue)
                         <li>{{ $legLabels[$issue['leg_type']] ?? $issue['leg_type'] }}: {{ $issue['failure_message'] }}</li>
@@ -55,7 +55,7 @@
         @endif
 
         <section class="panel">
-            <h2 class="section-title">Recorded route values</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Recorded route values</h2>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -75,7 +75,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Retry or correct the route</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Retry or correct the route</h2>
             <div class="form-actions">
                 <form method="POST" action="{{ route('transport-enquiries.route-retry', [$enquiry, $resolution]) }}">
                     @csrf
@@ -101,7 +101,7 @@
 
         @if ($canUseManualFallback)
             <section class="panel">
-                <h2 class="section-title">Use manual miles because route lookup is unavailable</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Use manual miles because route lookup is unavailable</h2>
                 <p class="section-copy">Enter all three legs. Every replacement value is recorded with your reason and the original route value.</p>
 
                 <form class="form-grid" method="POST" action="{{ route('transport-enquiries.manual-fallback', [$enquiry, $resolution]) }}">

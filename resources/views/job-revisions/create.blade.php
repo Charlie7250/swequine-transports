@@ -39,7 +39,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Active weekly fuel default for pricing</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>Active weekly fuel default for pricing</h2>
                     <p class="section-copy">A new draft will store this record the first time it is priced.</p>
                 </div>
             </div>
@@ -65,7 +65,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Active rate setting default for pricing</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Active rate setting default for pricing</h2>
                     <p class="section-copy">The depot postcode and active rates come from this stored settings record.</p>
                 </div>
             </div>

@@ -31,7 +31,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Current active fuel input</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>Current active fuel input</h2>
                     <p class="section-copy">This entry becomes the default fuel record for new pricing runs unless a revision already stores a different one.</p>
                 </div>
 
@@ -61,7 +61,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Add a weekly fuel entry</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>Add a weekly fuel entry</h2>
 
             <form class="form-section" method="POST" action="{{ route('admin.weekly-fuel-prices.store') }}">
                 @csrf
@@ -100,7 +100,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Add a fuel source</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>Add a fuel source</h2>
 
             <form class="form-section" method="POST" action="{{ route('admin.fuel-price-sources.store') }}">
                 @csrf
@@ -120,7 +120,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Weekly fuel history</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>Weekly fuel history</h2>
 
             @if ($weeklyFuelPrices->isEmpty())
                 <p class="empty-state">No weekly fuel history has been recorded yet.</p>

@@ -254,7 +254,9 @@
             }
 
             .auth-shell {
-                min-height: calc(100vh - 5.5rem);
+                min-height: 100vh;
+                align-content: center;
+                gap: 1.75rem;
                 display: grid;
                 place-items: center;
                 padding: 2rem 0 3rem;
@@ -725,6 +727,79 @@
             }
 
             /* --- Mockup-aligned refinements --- */
+            .auth-brand {
+                display: grid;
+                justify-items: center;
+                gap: 0.2rem;
+                color: var(--gold-500);
+                text-align: center;
+            }
+
+            .auth-brand-name {
+                color: var(--navy-950);
+                font-family: Georgia, "Times New Roman", serif;
+                font-size: 2.4rem;
+                font-style: italic;
+                line-height: 1;
+            }
+
+            .auth-brand-subtitle {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                color: var(--gold-600);
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 0.34em;
+                text-transform: uppercase;
+            }
+
+            .auth-brand-subtitle::before,
+            .auth-brand-subtitle::after {
+                content: "";
+                width: 2.2rem;
+                height: 1px;
+                background: currentColor;
+                opacity: 0.6;
+            }
+
+            .form-panel .eyebrow {
+                padding: 0;
+                background: transparent;
+                color: var(--gold-600);
+                letter-spacing: 0.2em;
+            }
+
+            .password-field {
+                position: relative;
+                display: block;
+            }
+
+            .password-field input {
+                padding-right: 3rem;
+            }
+
+            .password-toggle {
+                position: absolute;
+                top: 50%;
+                right: 0.6rem;
+                transform: translateY(-50%);
+                appearance: none;
+                border: 0;
+                background: transparent;
+                color: var(--ink-700);
+                font: inherit;
+                font-size: 0.8rem;
+                font-weight: 600;
+                cursor: pointer;
+                padding: 0.35rem 0.5rem;
+            }
+
+            .auth-shell .button-primary {
+                width: 100%;
+                border-radius: 0.7rem;
+            }
+
             input[type="text"]:focus,
             input[type="number"]:focus,
             input[type="date"]:focus,
@@ -846,18 +921,6 @@
             </div>
         @else
             <div class="shell">
-                <header class="topbar">
-                    <div class="topbar-inner">
-                        <a class="brand-mark" href="{{ route('dashboard') }}">
-                            <span class="brand-glyph">S</span>
-                            <span class="brand-copy">
-                                <span class="brand-name">South West Equine Services</span>
-                                <span class="brand-subtitle">Horse quotes workspace</span>
-                            </span>
-                        </a>
-                    </div>
-                </header>
-
                 @yield('content')
             </div>
         @endauth

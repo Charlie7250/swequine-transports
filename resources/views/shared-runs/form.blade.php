@@ -98,7 +98,7 @@
             <section class="panel">
                 <div class="page-header">
                     <div>
-                        <h2 class="section-title">Parent shared run</h2>
+                        <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Parent shared run</h2>
                         <p class="section-copy">Use one parent record for the operational run, then attach each customer allocation below.</p>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                 <section class="panel">
                     <div class="page-header">
                         <div>
-                            <h2 class="section-title">Customer allocation {{ $allocationIndex + 1 }}</h2>
+                            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="document" size="18" /></span>Customer allocation {{ $allocationIndex + 1 }}</h2>
                             <p class="section-copy">Assign full and split mileage for each standard route leg, then record why those miles belong to this customer.</p>
                         </div>
                         @if ($allocationSummary)

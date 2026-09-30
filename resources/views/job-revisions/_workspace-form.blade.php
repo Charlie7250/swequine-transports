@@ -61,7 +61,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Customer details</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="document" size="18" /></span>Customer details</h2>
                     <p class="section-copy">Capture the customer record alongside the operational quote notes for this revision.</p>
                 </div>
                 @if (isset($job))
@@ -103,7 +103,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Route and quote details</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Route and quote details</h2>
 
             <div class="split-grid">
                 <label>
@@ -153,7 +153,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Three-leg route entry</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Three-leg route entry</h2>
                     <p class="section-copy">This MVP is manual-first. Enter the miles for each fixed leg and the pricing engine will use those stored values.</p>
                 </div>
             </div>

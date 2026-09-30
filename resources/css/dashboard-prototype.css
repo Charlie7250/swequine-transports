@@ -1350,3 +1350,26 @@ html {
         grid-template-columns: auto minmax(0, 1fr);
     }
 }
+
+/* --- Brand logo (line-art horse head) --- */
+.operator-brand-logo {
+    margin-bottom: 0.35rem;
+    color: var(--prototype-gold-300);
+}
+
+.operator-sidebar-art {
+    position: absolute;
+    bottom: 4.5rem;
+    left: 50%;
+    z-index: 0;
+    transform: translateX(-50%);
+    color: var(--prototype-gold-300);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+@media (max-height: 760px) {
+    .operator-sidebar-art {
+        display: none;
+    }
+}

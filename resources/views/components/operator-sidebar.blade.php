@@ -1,6 +1,6 @@
 <aside class="operator-sidebar">
     <a class="operator-brand" href="{{ route('dashboard') }}" aria-label="South West Equine Services dashboard">
-        <span class="operator-brand-mark">SW</span>
+        <x-brand-logo class="operator-brand-logo" :size="104" />
         <span class="operator-brand-name">South West</span>
         <span class="operator-brand-subtitle">Equine Services</span>
     </a>
@@ -37,6 +37,8 @@
             </a>
         </div>
     </nav>
+
+    <x-brand-logo class="operator-sidebar-art" :size="220" />
 
     <p class="operator-sidebar-note">Safe journeys.<br>Happier horses.</p>
 </aside>

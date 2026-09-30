@@ -27,7 +27,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Current active rate setting</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Current active rate setting</h2>
                     <p class="section-copy">New pricing runs resolve these values unless a quote revision already stores a specific rate setting record.</p>
                 </div>
 
@@ -119,7 +119,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Add a rate setting record</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Add a rate setting record</h2>
 
             <form class="form-section" method="POST" action="{{ route('admin.rate-settings.store') }}">
                 @csrf
@@ -237,7 +237,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Recorded rate settings</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Recorded rate settings</h2>
 
             @if ($rateSettings->isEmpty())
                 <p class="empty-state">No rate settings have been recorded yet.</p>

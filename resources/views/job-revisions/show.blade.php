@@ -52,7 +52,7 @@
                 <div class="metric-copy">Stored calculated total</div>
             </article>
 
-            <article class="metric">
+            <article class="metric metric--accent">
                 <div class="metric-label">Final quoted total</div>
                 <div class="metric-value">£{{ number_format((float) ($revision->final_total ?? $revision->engine_total), 2) }}</div>
                 <div class="metric-copy">{{ $revision->manual_final_total_reason ?: 'No manual final total override recorded.' }}</div>
@@ -62,7 +62,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Quote actions</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="check" size="18" /></span>Quote actions</h2>
                     <p class="section-copy">Use the issue and pipeline actions here, the workspace form below keeps the revision content and totals up to date.</p>
                 </div>
                 <x-status-badge :status="$job->status" />
@@ -139,7 +139,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Fuel price record</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>Fuel price record</h2>
                     <p class="section-copy">The selected record stays with this revision. A correction creates a new draft revision.</p>
                 </div>
                 <span class="badge badge-muted">{{ $revision->weeklyFuelPrice?->week_commencing?->format('j M Y') ?? 'Not selected' }}</span>
@@ -193,7 +193,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Revision history</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="chart" size="18" /></span>Revision history</h2>
                     <p class="section-copy">Each revision keeps a structured snapshot of the quote path, totals, and notes that were current at that point in the workflow.</p>
                 </div>
                 <span class="badge badge-muted">{{ $job->revisions->count() }} revisions</span>
@@ -245,7 +245,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Shared run builder</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Shared run builder</h2>
                     <p class="section-copy">Use a parent shared run when this customer shares only part of the route and still needs their own auditable quote total.</p>
                 </div>
                 @if ($sharedRunAllocation)
@@ -296,7 +296,7 @@
             <section class="panel">
                 <div class="page-header">
                     <div>
-                        <h2 class="section-title">Automatic route</h2>
+                        <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Automatic route</h2>
                         <p class="section-copy">This draft uses the recorded automatic route as its pricing evidence.</p>
                     </div>
                     <span class="badge badge-active">{{ str_replace('_', ' ', $revision->routeResolution->overall_status) }}</span>
@@ -327,7 +327,7 @@
             <section class="panel">
                 <div class="page-header">
                     <div>
-                        <h2 class="section-title">Exception audit</h2>
+                        <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Exception audit</h2>
                         <p class="section-copy">Each change retains its original value, replacement value, reason, operator, and recorded time.</p>
                     </div>
                     <div class="form-actions">
@@ -370,7 +370,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="fuel" size="18" /></span>
                         {{ $pricingContext['weekly_fuel_price_is_stored'] ? 'Weekly fuel used for this quote' : 'Current weekly fuel default for pricing' }}
                     </h2>
                     <p class="section-copy">
@@ -405,7 +405,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>
                         {{ $pricingContext['rate_setting_is_stored'] ? 'Rate setting used for this quote' : 'Current rate setting default for pricing' }}
                     </h2>
                     <p class="section-copy">
@@ -459,7 +459,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">{{ $sharedRunAllocation ? 'Priced route legs for this allocation' : 'Priced route legs' }}</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>{{ $sharedRunAllocation ? 'Priced route legs for this allocation' : 'Priced route legs' }}</h2>
 
             @if ($revision->routeLegs->isEmpty())
                 <p class="empty-state">No route legs have been recorded for this revision yet.</p>
@@ -495,7 +495,7 @@
 
         @if ($revision->calculation_explanation)
             <details class="panel">
-                <summary class="section-title">Calculation explanation</summary>
+                <summary class="section-title"><span class="section-icon"><x-prototype-icon name="chart" size="18" /></span>Calculation explanation</summary>
 
                 <div class="detail-grid">
                     <article class="panel">
@@ -611,7 +611,7 @@
 
         @if ($sharedLoadExplanation)
             <section class="panel">
-                <h2 class="section-title">Shared allocation reasoning</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Shared allocation reasoning</h2>
                 @if (! empty($sharedLoadExplanation['shared_load_percentage']))
                     <p class="section-copy">
                         Split loaded miles were priced at {{ number_format((float) $sharedLoadExplanation['shared_load_percentage'] * 100, 2) }}% of the loaded rate.

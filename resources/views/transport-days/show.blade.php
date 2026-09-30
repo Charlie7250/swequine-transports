@@ -25,7 +25,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Jobs in this day</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="calendar" size="18" /></span>Jobs in this day</h2>
                     <p class="section-copy">Listed in the order they will be done. Grouping a job here does not change its price.</p>
                 </div>
                 <span class="badge {{ $memberJobs->isNotEmpty() ? 'badge-active' : 'badge-muted' }}">{{ $memberJobs->count() }}</span>
@@ -74,11 +74,16 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="route-endpoints">
+                    <span class="route-endpoint"><x-prototype-icon name="location" size="16" /> Depot start · {{ $transportDay->depot_postcode ?? 'depot not set' }}</span>
+                    <span class="route-endpoint"><x-prototype-icon name="depot" size="16" /> Depot finish · {{ $transportDay->depot_postcode ?? 'depot not set' }}</span>
+                </div>
             @endif
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Add a job to this day</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="plus" size="18" /></span>Add a job to this day</h2>
 
             @if ($assignableJobs->isEmpty())
                 <p class="empty-state">No unassigned jobs are available to add.</p>
