@@ -97,36 +97,8 @@ html {
     text-align: center;
 }
 
-.operator-brand-mark {
-    display: grid;
-    width: 3.7rem;
-    height: 3.7rem;
-    place-items: center;
-    margin-bottom: 0.55rem;
-    border: 1px solid rgba(228, 199, 121, 0.72);
-    border-radius: 50%;
-    color: var(--prototype-gold-300);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.25rem;
-    letter-spacing: 0.08em;
-}
 
-.operator-brand-name {
-    color: #f3dfaa;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.48rem;
-    font-style: italic;
-    line-height: 1;
-}
 
-.operator-brand-subtitle {
-    margin-top: 0.45rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-}
 
 .operator-nav {
     position: relative;
@@ -1351,25 +1323,10 @@ html {
     }
 }
 
-/* --- Brand logo (line-art horse head) --- */
+/* --- Brand logo (supplied artwork, public/images/brand) --- */
 .operator-brand-logo {
-    margin-bottom: 0.35rem;
-    color: var(--prototype-gold-300);
-}
-
-.operator-sidebar-art {
-    position: absolute;
-    bottom: 4.5rem;
-    left: 50%;
-    z-index: 0;
-    transform: translateX(-50%);
-    color: var(--prototype-gold-300);
-    opacity: 0.1;
-    pointer-events: none;
-}
-
-@media (max-height: 760px) {
-    .operator-sidebar-art {
-        display: none;
-    }
+    display: block;
+    width: 168px;
+    max-width: 100%;
+    height: auto;
 }

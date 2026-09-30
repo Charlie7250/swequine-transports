@@ -730,38 +730,15 @@
             .auth-brand {
                 display: grid;
                 justify-items: center;
-                gap: 0.2rem;
-                color: var(--gold-500);
-                text-align: center;
             }
 
-            .auth-brand-name {
-                color: var(--navy-950);
-                font-family: Georgia, "Times New Roman", serif;
-                font-size: 2.4rem;
-                font-style: italic;
-                line-height: 1;
+            .auth-brand .brand-logo {
+                width: min(250px, 70vw);
+                height: auto;
             }
 
-            .auth-brand-subtitle {
-                display: flex;
-                align-items: center;
-                gap: 0.6rem;
-                color: var(--gold-600);
-                font-size: 0.72rem;
-                font-weight: 600;
-                letter-spacing: 0.34em;
-                text-transform: uppercase;
-            }
 
-            .auth-brand-subtitle::before,
-            .auth-brand-subtitle::after {
-                content: "";
-                width: 2.2rem;
-                height: 1px;
-                background: currentColor;
-                opacity: 0.6;
-            }
+
 
             .form-panel .eyebrow {
                 padding: 0;

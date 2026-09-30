@@ -99,8 +99,8 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
 
 - [x] **R0. Phase 0 — unify the content design system** with the mockups (tokens, fonts, paper
   cards, gold buttons, tinted tables, status dots, topbar search/bell placeholders). `aa49642`.
-- [x] **R1. Polish pass** — line-art horse-head `<x-brand-logo>` (sidebar + login lockup +
-  sidebar watermark), login layout, gold icon chips on all 47 section headings, final-total accent
+- [x] **R1. Polish pass** — brand logo (now the official supplied artwork, see D5), login
+  layout, gold icon chips on all 47 section headings, final-total accent
   card, depot start/finish strip on transport-day detail. `7072fa9`. Host suite 286 green.
 - [ ] **R2. Mobile re-skin of the six field pages** to match the `*-mobile.png` designs: new
   enquiry, route review, route exception, quote workspace, quote exceptions, transport-day detail
@@ -147,8 +147,10 @@ approved scope until you say so; each then becomes a scoped item with acceptance
 - [ ] **D4. Commit a screenshot tool for visual checks** (`playwright-core` dev dependency +
   a small script driving the pre-installed Chromium) so loops can verify pages against the
   mockups, as done manually for R0/R1. New dev dependency → needs your OK.
-- [ ] **D5. Supply final brand assets** (optional): an approved logo SVG and the sidebar horse
-  photo from the mockups. The inline line-art logo is a stand-in until then.
+- [~] **D5. Brand assets.** Official logo supplied 2026-09-30 and now used everywhere
+  (`public/images/brand/`: `logo-full-*` and `logo-mark-*` in white, gold, gold-deep and navy;
+  rendered via `<x-brand-logo variant tone width>`): sidebar (gold), login (gold-deep), printed
+  issued quote (navy). Still optional: the dark horse photo from the sidebar mockup.
 
 ## Blocked on human decision (surface these; do NOT act autonomously)
 

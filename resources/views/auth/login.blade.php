@@ -3,9 +3,7 @@
 @section('content')
     <main class="page auth-shell">
         <div class="auth-brand">
-            <x-brand-logo :size="150" />
-            <span class="auth-brand-name">South West</span>
-            <span class="auth-brand-subtitle">Equine Services</span>
+            <x-brand-logo tone="gold-deep" :width="250" />
         </div>
 
         <section class="form-panel">
