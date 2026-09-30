@@ -23,7 +23,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Enquiry</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="document" size="18" /></span>Enquiry</h2>
                     <p class="section-copy">Draft enquiry for {{ $enquiry->customer_name }}</p>
                 </div>
                 <span class="badge {{ $resolution->pricing_eligible ? 'badge-active' : 'badge-muted' }}">
@@ -48,7 +48,7 @@
         </section>
 
         <section class="panel">
-            <h2 class="section-title">Route legs</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Route legs</h2>
 
             <table class="data-table">
                 <thead>
@@ -74,7 +74,7 @@
 
         @if ($canHandleException)
             <section class="panel">
-                <h2 class="section-title">Location review</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="truck" size="18" /></span>Location review</h2>
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -102,7 +102,7 @@
 
         @if ($routeIssues !== [])
             <section class="panel">
-                <h2 class="section-title">Route issues</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Route issues</h2>
                 <ul class="bullet-list">
                     @foreach ($routeIssues as $issue)
                         <li>{{ $legLabels[$issue['leg_type']] ?? $issue['leg_type'] }}: {{ $issue['failure_message'] }}</li>
@@ -113,7 +113,7 @@
 
         @if ($routeWarnings !== [])
             <section class="panel">
-                <h2 class="section-title">Route warnings</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Route warnings</h2>
                 <ul class="bullet-list">
                     @foreach ($routeWarnings as $warning)
                         <li>{{ $warning['message'] }}</li>
@@ -141,7 +141,7 @@
 
         @if ($canHandleException)
             <section class="panel">
-                <h2 class="section-title">Route exception</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Route exception</h2>
                 <p class="section-copy">Retry or correct the route first. Exception controls keep the recorded route evidence and require a reason for every changed value.</p>
                 <div class="form-actions">
                     <a class="button button-outline" href="{{ route('transport-enquiries.route-exception', [$enquiry, $resolution]) }}">Handle route exception</a>

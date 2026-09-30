@@ -20,7 +20,7 @@
     @endif
 
     <section class="panel">
-        <h2 class="section-title">Customer details</h2>
+        <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="document" size="18" /></span>Customer details</h2>
 
         <div class="split-grid">
             <label>
@@ -52,7 +52,7 @@
     </section>
 
     <section class="panel">
-        <h2 class="section-title">Loading-practice pricing</h2>
+        <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="chart" size="18" /></span>Loading-practice pricing</h2>
 
         <div class="split-grid">
             <label>

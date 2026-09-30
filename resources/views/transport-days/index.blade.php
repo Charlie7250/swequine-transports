@@ -17,7 +17,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Recorded transport days</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="calendar" size="18" /></span>Recorded transport days</h2>
                     <p class="section-copy">Each day holds one or more jobs in sequence.</p>
                 </div>
                 <a class="button button-primary" href="{{ route('transport-days.create') }}">New transport day</a>

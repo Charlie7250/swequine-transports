@@ -1,6 +1,8 @@
 # Proposed enhancements (beyond today's MVP)
 
-Status: **proposals, not approved scope.** These are features surfaced by the dashboard redesign
+Status: **proposals, not approved scope.** Recommended build order (updated 2026-09-30) lives in
+`docs/BACKLOG.md` → *Next features*. Global search and notifications now appear in the app's
+topbar as visual-only placeholders, which raises their priority. These are features surfaced by the dashboard redesign
 mockup that don't exist in the app yet but are genuinely worth building. Recording them so they're
 not lost, and so the design + build work can pick them up deliberately rather than by accident.
 

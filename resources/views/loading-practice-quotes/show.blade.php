@@ -62,7 +62,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>
                         {{ $pricingContext['rate_setting_is_stored'] ? 'Rate setting used for this quote' : 'Current rate setting default for pricing' }}
                     </h2>
                     <p class="section-copy">{{ $pricingContext['rate_setting_origin'] }}</p>
@@ -116,7 +116,7 @@
 
         @if ($explanation)
             <details class="panel" open>
-                <summary class="section-title">Calculation explanation</summary>
+                <summary class="section-title"><span class="section-icon"><x-prototype-icon name="chart" size="18" /></span>Calculation explanation</summary>
 
                 <div class="detail-grid">
                     <article class="panel">
@@ -146,7 +146,7 @@
                     </article>
 
                     <article class="panel">
-                        <h2 class="section-title">Totals</h2>
+                        <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="chart" size="18" /></span>Totals</h2>
                         <dl class="detail-list">
                             <div>
                                 <dt>Engine total</dt>

@@ -80,6 +80,13 @@
                 font-size: 1.35rem;
             }
 
+            .quote-logo {
+                display: block;
+                width: 120px;
+                height: auto;
+                margin-bottom: 1rem;
+            }
+
             .reference {
                 min-width: 14rem;
                 text-align: right;
@@ -217,6 +224,7 @@
         <main class="quote">
             <header class="quote-header">
                 <div>
+                    <img class="quote-logo" src="{{ asset('images/brand/logo-full-navy.png') }}" alt="South West Equine Services" width="120" height="102">
                     <p class="eyebrow">South West Equine Services</p>
                     <h1>Issued quote</h1>
                     <p>This is the staff-held issued revision record for manual customer delivery.</p>

@@ -38,7 +38,7 @@
         <section class="panel">
             <div class="page-header">
                 <div>
-                    <h2 class="section-title">Active rate setting for loading practice</h2>
+                    <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Active rate setting for loading practice</h2>
                     <p class="section-copy">A new loading-practice quote will store this package configuration when it is first priced.</p>
                 </div>
             </div>

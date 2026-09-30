@@ -16,6 +16,25 @@ Tasks are `[ ]` todo, `[~]` in progress, `[x]` done. Keep this file honest.
 
 ---
 
+## Priority snapshot (updated 2026-09-30, after the UI re-skin)
+
+The app now matches the approved designs in `docs/design/` and the full flow clicks through.
+Recommended order from here — **decisions** are yours, **build** items a loop can take:
+
+1. **Decide H2** — accept the approved mockups + current re-skin as the minimum visual gate for the
+   operator trial (quick yes/no; the design work is done).
+2. **Build R3** — honesty pass on topbar placeholders (remove the fake notification count) before
+   any operator sees the app.
+3. **Build R2** — mobile re-skin of the six field pages (stacked cards + sticky action bar).
+4. **Decide H1** — routing provider (critical path for real quoting in a trial).
+5. **Decide H4** — hosting/ownership (critical path for putting the trial live).
+6. **Decide which features to green-light first** — recommended order in *Next features* below
+   (date sorting → customers page → global search → notifications → job times).
+
+Operator-trial critical path: **H2 → H1 → H4 → H5**. Everything else can run in parallel.
+
+---
+
 ## ⚠️ E1 — Loop blocker: frontend build fails under restricted egress (needs a decision)
 
 - [x] **E1. RESOLVED (2026-09-25, user-approved).** Removed the build-time remote font fetch from
@@ -76,6 +95,45 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
   (the legacy-import workflow); the broader app suite still runs on SQLite. Full PostgreSQL parity
   for all feature paths remains a later hardening item if desired.
 
+## UI re-skin to the approved designs (`docs/design/*.png`)
+
+- [x] **R0. Phase 0 — unify the content design system** with the mockups (tokens, fonts, paper
+  cards, gold buttons, tinted tables, status dots, topbar search/bell placeholders). `aa49642`.
+- [x] **R1. Polish pass** — brand logo (now the official supplied artwork, see D5), login
+  layout, gold icon chips on all 47 section headings, final-total accent
+  card, depot start/finish strip on transport-day detail. `7072fa9`. Host suite 286 green.
+- [ ] **R2. Mobile re-skin of the six field pages** to match the `*-mobile.png` designs: new
+  enquiry, route review, route exception, quote workspace, quote exceptions, transport-day detail
+  (plus shared-run builder, which also has a mobile design). Tables collapse to stacked cards with
+  labelled rows; primary action moves to the existing `.mobile-action-bar` (sticky). *Verify:*
+  390px screenshots vs the mobile mockups; host suite green.
+- [ ] **R3. Honesty pass on placeholders before any operator trial.** The topbar bell shows a
+  hard-coded "3" to match the mockup — remove the count (or show "coming soon") so operators are
+  never shown fake data. Keep search visibly disabled. *Verify:* no fabricated values in the shell.
+- [ ] **R4. Per-page layout refinements** still short of the mockups: enquiry form as a deliberate
+  two-column "Enquiry details" card; rate-settings active card (left column too sparse); issued
+  quote restyled to the `issued-quote.png` print design. Low risk, cosmetic.
+- [ ] **R5. Dashboard parity check** — confirm the production `/dashboard` matches the original
+  dashboard mockup now that the shared shell changed; fix any drift.
+
+## Next features — recommended order (awaiting your go-ahead)
+
+Full detail, data needs and effort in `docs/product/proposed-enhancements.md`. None of these is
+approved scope until you say so; each then becomes a scoped item with acceptance criteria.
+
+1. **Date sorting / range filter** (S) — the Today/Day/Week/Month controls already exist on the
+   dashboard, presentation-only. Cheapest visible win.
+2. **Customers page** (S–M) — `Customer` model already exists; also the foundation for search.
+3. **Global search** (M) — now visible as a placeholder in every page's topbar, so operators will
+   reach for it. Jobs, customers, postcodes.
+4. **Notifications** (M) — bell now visible; stale pending quotes, route failures, upcoming days.
+   Needs you to choose which events and thresholds.
+5. **Job / stop times + ETAs** (M) — ETAs partly free from stored `duration_seconds`.
+6. **Calendar view** (M) — after 1 and 5.
+7. **Reporting / revenue trends** (M–L) — agree the metrics first.
+8. **Later subsystems** (L, product decision each): horse records, vehicles/drivers/assignment,
+   route optimisation (high value, hard — gated on H1).
+
 ## Needs light user approval (not a big decision, but touches policy/deps)
 
 - [x] **D1. Committed the frontend lockfile** (`package-lock.json`, 2026-09-25, user-approved) to
@@ -83,6 +141,16 @@ Ordered by priority. Each is self-contained and verifiable without a human decis
 - [ ] **D2. Reconcile transport-day / beta-baseline docs** that still call transport-day
   "proposed" though routes/views/model/services exist. Low risk, but decide historical-vs-current
   framing with the user.
+- [ ] **D3. Self-host the Instrument Sans font** (e.g. `@fontsource/instrument-sans` via npm) so
+  body text matches the designs exactly; currently falls back to a system sans since E1. New npm
+  dependency → needs your OK.
+- [ ] **D4. Commit a screenshot tool for visual checks** (`playwright-core` dev dependency +
+  a small script driving the pre-installed Chromium) so loops can verify pages against the
+  mockups, as done manually for R0/R1. New dev dependency → needs your OK.
+- [~] **D5. Brand assets.** Official logo supplied 2026-09-30 and now used everywhere
+  (`public/images/brand/`: `logo-full-*` and `logo-mark-*` in white, gold, gold-deep and navy;
+  rendered via `<x-brand-logo variant tone width>`): sidebar (gold), login (gold-deep), printed
+  issued quote (navy). Still optional: the dark horse photo from the sidebar mockup.
 
 ## Blocked on human decision (surface these; do NOT act autonomously)
 
@@ -91,13 +159,15 @@ not guess an answer. Full context + owners in `docs/horse-quotes/release-1/open-
 
 - [ ] **H1. Choose the paid routing provider + commercial terms** (D1). Unblocks live-routing
   verification and Slice 2 sign-off.
-- [ ] **H2. Define the minimum visual-quality gate** for the first operator trial (currently
-  deferred/undefined). Blocks the Cliff & Sophie trial.
+- [ ] **H2. Define the minimum visual-quality gate** for the first operator trial. Blocks the
+  Cliff & Sophie trial. **Candidate answer ready (2026-09-30):** the approved mockups in
+  `docs/design/` as implemented by R0/R1 (optionally plus R2 mobile). Needs only your yes/no.
 - [ ] **H3. Confirm provisional pricing values** with the client (horse multipliers 1.5/1.75,
   shared-load 0.75, extras treatment, short-journey factor). Until then pricing stays provisional.
 - [ ] **H4. Name technical/business ownership, hosting (≤£50/mo), secrets, backup, rollback,
   outage response** (D12). Blocks any staging/production/deployment.
-- [ ] **H5. Approve the operator trial** and its access/accounts once H2 and the F1/F2 fixes land.
+- [ ] **H5. Approve the operator trial** and its access/accounts. F1/F2 have landed; now gated on
+  H2, plus H1 (live routing) and H4 (hosting) for real use.
 
 ## Explicitly out of scope now (documented, build later)
 

@@ -14,7 +14,7 @@
 
         @if ($canOverrideRouteLegs)
             <section class="panel">
-                <h2 class="section-title">Adjust a disputed route leg</h2>
+                <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Adjust a disputed route leg</h2>
                 <p class="section-copy">Enter only the legs that need a replacement mile value. Each changed leg needs its own category and explanation.</p>
 
                 <form class="form-grid" method="POST" action="{{ route('jobs.revisions.route-leg-overrides', [$job, $revision]) }}">
@@ -50,7 +50,7 @@
         @endif
 
         <section class="panel">
-            <h2 class="section-title">Final total override</h2>
+            <h2 class="section-title"><span class="section-icon"><x-prototype-icon name="settings" size="18" /></span>Final total override</h2>
             <p class="section-copy">Engine total: £{{ number_format((float) $revision->engine_total, 2) }}. The engine result stays in the quote record.</p>
 
             <form class="form-grid" method="POST" action="{{ route('jobs.revisions.final-total-override', [$job, $revision]) }}">

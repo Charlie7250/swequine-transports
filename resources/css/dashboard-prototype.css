@@ -97,36 +97,8 @@ html {
     text-align: center;
 }
 
-.operator-brand-mark {
-    display: grid;
-    width: 3.7rem;
-    height: 3.7rem;
-    place-items: center;
-    margin-bottom: 0.55rem;
-    border: 1px solid rgba(228, 199, 121, 0.72);
-    border-radius: 50%;
-    color: var(--prototype-gold-300);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.25rem;
-    letter-spacing: 0.08em;
-}
 
-.operator-brand-name {
-    color: #f3dfaa;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.48rem;
-    font-style: italic;
-    line-height: 1;
-}
 
-.operator-brand-subtitle {
-    margin-top: 0.45rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-}
 
 .operator-nav {
     position: relative;
@@ -223,6 +195,70 @@ html {
     font-weight: 700;
     letter-spacing: 0.24em;
     text-transform: uppercase;
+}
+
+.operator-topbar-search {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex: 1;
+    max-width: 26rem;
+    margin-right: auto;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--prototype-stone-200);
+    background: var(--prototype-cream-50);
+    color: var(--prototype-muted);
+}
+
+.operator-topbar-search input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    color: var(--prototype-ink);
+    font: inherit;
+    font-family: "Instrument Sans", "Segoe UI", sans-serif;
+    font-size: 0.9rem;
+}
+
+.operator-topbar-search input:focus {
+    outline: none;
+}
+
+.operator-bell {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    border: 1px solid var(--prototype-stone-200);
+    background: var(--prototype-paper);
+    color: var(--prototype-navy-900);
+    cursor: default;
+}
+
+.operator-bell-count {
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+    min-width: 1.05rem;
+    height: 1.05rem;
+    padding: 0 0.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--prototype-gold-500);
+    color: #fffdf7;
+    font-family: "Instrument Sans", "Segoe UI", sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    .operator-topbar-search {
+        display: none;
+    }
 }
 
 .operator-profile {
@@ -1285,4 +1321,12 @@ html {
         grid-column: auto;
         grid-template-columns: auto minmax(0, 1fr);
     }
+}
+
+/* --- Brand logo (supplied artwork, public/images/brand) --- */
+.operator-brand-logo {
+    display: block;
+    width: 168px;
+    max-width: 100%;
+    height: auto;
 }

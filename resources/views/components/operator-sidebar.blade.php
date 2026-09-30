@@ -1,8 +1,6 @@
 <aside class="operator-sidebar">
     <a class="operator-brand" href="{{ route('dashboard') }}" aria-label="South West Equine Services dashboard">
-        <span class="operator-brand-mark">SW</span>
-        <span class="operator-brand-name">South West</span>
-        <span class="operator-brand-subtitle">Equine Services</span>
+        <x-brand-logo class="operator-brand-logo" tone="gold" :width="168" />
     </a>
 
     <nav class="operator-nav" aria-label="Primary navigation">

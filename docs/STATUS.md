@@ -1,7 +1,7 @@
 # STATUS — current state and next action
 
 **This file is the live source of truth for "where are we right now."** Update it whenever state
-changes. Last updated: 2026-09-25.
+changes. Last updated: 2026-09-30.
 
 For the task list see [`BACKLOG.md`](BACKLOG.md). For how to work the loop see
 [`/CLAUDE.md`](../CLAUDE.md).
@@ -10,10 +10,20 @@ For the task list see [`BACKLOG.md`](BACKLOG.md). For how to work the loop see
 
 ## One-line state
 
-Private quoting portal: **core code built (routing + pricing + workflow) and the full host suite is
-green (286 tests) after the build fix.** F1/F2 are resolved. Remaining MVP-to-deploy work is gated
-on human decisions (routing provider, hosting/ownership, visual standard, pricing sign-off) plus
-PostgreSQL verification.
+Private quoting portal: **core code built (routing + pricing + workflow), host suite green (286),
+and the UI now matches the approved designs** in `docs/design/` — the whole flow clicks through as
+a styled app. F1/F2 resolved. Reaching an operator trial is gated on human decisions (visual gate
+H2 — answer ready, routing provider H1, hosting/ownership H4) plus the mobile re-skin (R2).
+
+## UI state (2026-09-30)
+
+- Approved designs: 22 mockups in `docs/design/` (16 desktop screens + mobile variants), produced
+  from `docs/design/page-design-prompts.md`.
+- Implemented: R0 design-system unification + R1 polish (brand logo, login lockup, section icons,
+  final-total accent, depot strip). Verified desktop + mobile by screenshot.
+- Remaining: R2 mobile field pages, R3 remove fake notification count, R4 small layout gaps,
+  R5 dashboard parity. Topbar **search and notifications are visual-only placeholders** — the
+  features themselves are ranked under *Next features* in `BACKLOG.md`.
 
 ## What is built (confirmed in code)
 
@@ -79,8 +89,10 @@ See `docs/horse-quotes/release-1/open-decisions.md` (D1–D12) for the full deci
 
 ## Next action
 
-The autonomous lane is clear: docs reconciled, F1/F2 verified, host suite (286) and PostgreSQL
-integration suite (15) both green, build works offline. **Everything remaining to reach a real MVP
-release is gated on human decisions (H1–H5 in BACKLOG)** — routing provider, hosting/ownership,
-visual standard, pricing sign-off, trial approval. A loop should surface the next gate, not invent
-answers. Optional later autonomous hardening: full PostgreSQL parity for all feature paths.
+See the **Priority snapshot** at the top of `BACKLOG.md`. In short:
+
+- **Your decisions:** H2 (accept the mockups as the trial's visual gate — quick yes/no), then H1
+  (routing provider) and H4 (hosting/ownership) — the operator-trial critical path — and which
+  *Next features* to green-light first (recommended: date sorting, customers page, global search).
+- **Autonomous (loop-ready):** R3 placeholder honesty pass, R2 mobile re-skin, R4/R5 polish.
+  Do not start *Next features* until approved.
